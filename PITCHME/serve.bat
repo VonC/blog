@@ -1,0 +1,1 @@
+START /B CMD /C call go run %~dp0server.go
