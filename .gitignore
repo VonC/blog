@@ -1,0 +1,8 @@
+/PITCHME/**
+!/PITCHME/*.au3
+!/PITCHME/*.bat
+!/PITCHME/*.go
+.history/
+*.exe
+hello
+*.zip
