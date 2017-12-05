@@ -178,7 +178,7 @@ Source <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-con
 Key: you will need both, almost always.  
 That is: isolation within a VM on a machine host.
 
-![VM with Docker w70](assets/img/VMwithDocker.png)
+![VM with Docker w57](assets/img/VMwithDocker.png)
 
 Note:
 
