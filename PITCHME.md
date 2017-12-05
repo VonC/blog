@@ -365,7 +365,7 @@ Note:
 
 #### Principle
 
-![Pizza as a Service 2014 w70](assets/img/pizzaas.png)
+![Pizza as a Service 2014 w67](assets/img/pizzaas.png)
 
 Note:
 
