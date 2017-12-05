@@ -1,0 +1,17 @@
+#!/bin/bash -e
+echo test>/TEST
+ls -alrth /TEST
+hostname
+id -nu vonc
+read -p "Press any key to continue... " -n1 -s
+echo .
+tput setaf 3
+echo docker run -it --rm -v /:/hostOS root
+tput setaf 1
+docker run -it --rm -v /:/hostOS root
+tput sgr0
+ls -alrth /
+tput setaf 2
+hostname
+id -nu vonc
+tput sgr0
