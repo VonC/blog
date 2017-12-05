@@ -33,7 +33,7 @@ Docker seems a good fit, but do you know what it entails?
     - [What is beyond Docker](#what-is-beyond-docker)
         - [Persistent volumes](#persistent-volumes)
         - [Swarm vs. Kubernetes](#swarm-vs-kubernetes)
-        - [Declarative approach (for everything)](#declarative-approach-for-everything)
+        - [Declarative approach (for all)](#declarative-approach-for-all)
     - [Conclusion](#conclusion)
         - [Training](#training)
 
@@ -178,7 +178,7 @@ Source <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-con
 Key: you will need both, almost always.  
 That is: isolation within a VM on a machine host.
 
-![VM with Docker w70](assets/img/VMwithDocker.png)
+![VM with Docker w50](assets/img/VMwithDocker.png)
 
 Note:
 
