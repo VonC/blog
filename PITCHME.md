@@ -644,11 +644,11 @@ Source: <https://www.pinterest.com/pin/567242515558273751/>
 
 ### What for: Sumary
 
-- Container as a Service
+- Container as a Service:  
   Between IAAS and PAAS
-- Orchestration
+- Orchestration:  
   Manage containers between different nodes
-- Dev? Ops? DevOps
+- Dev? Ops? DevOps:  
   Culture change
   
 ---
@@ -881,11 +881,11 @@ Note:
 
 ### What against: Sumary
 
-- Security:
+- Security:  
   Patches, isolation, filesystem
-- Docker releases
+- Docker releases:  
   Delta, wrapper, support
-- Legacy
+- Legacy:  
   Security, Administration, business (and licenses)
   
 ---
@@ -1128,11 +1128,11 @@ Note:
 
 ### What beyond: Sumary
 
-- Peristence:
+- Peristence:  
   Volume Drivers are evolving
-- Orchestrators:
+- Orchestrators:  
   Docker Swarm vs. Kubernetes
-- Descriptive or Prescriptive
+- Descriptive or Prescriptive:  
   text file, better ownership
 
 ---
