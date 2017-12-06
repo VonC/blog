@@ -306,7 +306,7 @@ Docker 1.11, April 2016
 
 The year of Moby
 
-![Docker 2017: Moby modularity w70](assets/img/docker2017.png)
+![Docker 2017: Moby modularity w67](assets/img/docker2017.png)
 
 Note:
 
