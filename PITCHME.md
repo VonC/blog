@@ -22,18 +22,22 @@ Docker seems a good fit, but do you know what it entails?
         - [(What) Isolation vs. VM](#what-isolation-vs-vm)
         - [Host vs. Guest](#host-vs-guest)
         - [ContainerD, runc, CNCF, OCI, CRI-O, and Co](#containerd-runc-cncf-oci-cri-o-and-co)
+        - [What: Sumary](#what-sumary)
     - [What for Docker](#what-for-docker)
         - [Pass, saas, caas, clouds](#pass-saas-caas-clouds)
         - [Orchestration](#orchestration)
         - [Dev? Ops? DevOps](#dev-ops-devops)
+        - [What for: Sumary](#what-for-sumary)
     - [What is against Docker](#what-is-against-docker)
         - [Security](#security)
         - [Moving target](#moving-target)
         - [Legacy infrastructure & politics, licenses](#legacy-infrastructure-politics-licenses)
+        - [What against: Sumary](#what-against-sumary)
     - [What is beyond Docker](#what-is-beyond-docker)
         - [Persistent volumes](#persistent-volumes)
         - [Swarm vs. Kubernetes](#swarm-vs-kubernetes)
         - [Declarative approach (for all)](#declarative-approach-for-all)
+        - [What beyond: Sumary](#what-beyond-sumary)
     - [Conclusion](#conclusion)
         - [Training](#training)
 
@@ -338,6 +342,17 @@ Adel explains:
 ![Docker batteries w30 bw](assets/img/docker-batteries.png)
 
 ---
+
+### What: Sumary
+
+- Vm vs. Container (isolation):  
+  you need both
+- Host vs. Guest:  
+  a container make kernel system calls
+- Architecture:  
+  Modular
+
+---
 <!-- .slide: data-background="#030202" -->
 
 ## What for Docker
@@ -626,6 +641,17 @@ Note:
 Source: <https://www.pinterest.com/pin/567242515558273751/>
 
 ---
+
+### What for: Sumary
+
+- Container as a Service
+  Between IAAS and PAAS
+- Orchestration
+  Manage containers between different nodes
+- Dev? Ops? DevOps
+  Culture change
+  
+---
 <!-- .slide: data-background="#030202" -->
 
 ## What is against Docker
@@ -852,6 +878,17 @@ Note:
 - Example: portainer.io, Kubernetes dashboard
 
 ---
+
+### What against: Sumary
+
+- Security:
+  Patches, isolation, filesystem
+- Docker releases
+  Delta, wrapper, support
+- Legacy
+  Security, Administration, business (and licenses)
+  
+---
 <!-- .slide: data-background="#030202" -->
 
 ## What is beyond Docker
@@ -1059,7 +1096,7 @@ The same can by said of Docker or Kubernetes.
 
 +++
 
-#### Declarative vs. descritive
+#### Declarative vs. Prescriptive
 
 - Declarative: maven, Jenkins, Dockerfile
 - Prescriptive: swarm, Kubernetes
@@ -1086,6 +1123,17 @@ Note:
 - You don't depend on a running system
 
 ![Restore from file bw](assets/img/file-restore.png)
+
+---
+
+### What beyond: Sumary
+
+- Peristence:
+  Volume Drivers are evolving
+- Orchestrators:
+  Docker Swarm vs. Kubernetes
+- Descriptive or Prescriptive
+  text file, better ownership
 
 ---
 <!-- .slide: data-background="#030202" -->
