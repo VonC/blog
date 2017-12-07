@@ -496,7 +496,7 @@ There is always a server:
 
 ### Orchestration
 
-One does not deploy just an application...
+One does not deploy just an application...  
 But a system.
 
 - Principle
