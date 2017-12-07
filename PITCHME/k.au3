@@ -36,10 +36,10 @@ Func _KeyProc($nCode, $wParam, $lParam)
 			Case 0x41 ;KeyPressed========= 0x41 = "a"
 			    _keybd_event(0x60, 0) ;Key to Send to OS=====0x60 = numpad0
                 Return -1
-			Case 0x28 ;KeyPressed========= 0x28 = "DOWN ARROW key"
+			Case 0x26 ;KeyPressed========= 0x26 = "UP ARROW key"
 			    _keybd_event(0x20, 0) ;Key to Send to OS=====0x20 = SPACEBAR
                 Return -1
-			Case 0x26 ;KeyPressed========= 0x26 = "UP ARROW key"
+			Case 0x28 ;KeyPressed========= 0x28 = "DOWN ARROW key"
 			    _keybd_event(0x25, 0) ;Key to Send to OS=====0x25 = LEFT ARROW key
                 Return -1
 			Case 0xAE ;KeyPressed========= 0xAE = "Volume Down key"
