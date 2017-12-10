@@ -1,0 +1,52 @@
+.reveal section img {
+	border-color: #5fff00;
+}
+.reveal .progress span {
+  background: #ff0000;
+}
+
+
+section.present > p > img[alt="Chaffiol"], section.present > p > img[alt="VonC"] {
+	position: absolute;
+	right: -20px;
+	margin: 12px 0px;
+}
+
+img[alt~="w20"] {
+  width: 20%;
+}
+img[alt~="w30"] {
+  width: 30%;
+}
+img[alt~="w47"] {
+  width: 47%;
+}
+img[alt~="w57"] {
+  width: 57%;
+}
+img[alt~="w67"] {
+  width: 67%;
+}
+img[alt~="bw"] {
+  background: white !important;
+}
+
+img[alt~="w50"] {
+  width: 50%;
+}
+
+img[alt~="w75"] {
+  width: 75%;
+}
+
+img[alt~="w85"] {
+  width: 85%;
+}
+
+img[alt~="h50"] {
+  height: 50%;
+}
+
+img[alt~="h75"] {
+  width: 70%;
+}

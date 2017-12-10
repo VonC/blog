@@ -1,2 +1,3 @@
 # talks
-Talks and presentations with GitPitch
+
+Talks with GitPitch
