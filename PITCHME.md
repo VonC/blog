@@ -34,7 +34,10 @@ from Dmitri Melikyan (<https://github.com/dmelikyan>) founder of StackImpact (<h
 
 Main example: "Using the Go execution tracer to speed up fractal rendering" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
 <https://campoy.cat/blog/using-the-go-tracer-to-speed-up-fractal-making/>)
-from Francesc Campoy (<https://twitter.com/francesc>)
+from Francesc Campoy (<https://twitter.com/francesc>):
+
+- His code is at <https://github.com/campoy/justforfunc/tree/master/22-perf>
+- And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
 
 Based on code from <https://github.com/sfluor/fractcli>, authored
 by Salph Tabet (<https://github.com/sfluor>)
