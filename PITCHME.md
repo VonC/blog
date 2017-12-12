@@ -30,7 +30,8 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
   - Memory
 
 Profiler pprof "**Go Profiler Internals**" (<https://stackimpact.com/blog/go-profiler-internals/>)
-from **Dmitri Melikyan** (<https://github.com/dmelikyan>) founder of **StackImpact** (<https://twitter.com/stackimpact>).
+from **Dmitri Melikyan** (<https://github.com/dmelikyan>)
+founder of **StackImpact** (<https://twitter.com/stackimpact>).
 
 Main example: "**Using the Go execution tracer to speed up fractal rendering**" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
 <https://campoy.cat/blog/using-the-go-tracer-to-speed-up-fractal-making/>)
@@ -46,3 +47,24 @@ with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
 
 Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
 by **Karl Sims** (<http://www.karlsims.com/>)
+
+## Performance Profiling
+
+2 big categories
+
+- Statistical
+- Event-based
+
+<https://en.wikipedia.org/wiki/Profiling_(computer_programming)>
+
+### Statistical
+
+pprof
+
+### Event-based
+
+Tracer (hooks)
+
+## Steps
+
+### Add Profiling
