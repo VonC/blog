@@ -40,4 +40,6 @@ from Francesc Campoy (<https://twitter.com/francesc>):
 - And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
 
 Based on code from <https://github.com/sfluor/fractcli>, authored
-by Salph Tabet (<https://github.com/sfluor>)
+by Salph Tabet (<https://github.com/sfluor>)  
+It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
+with colors in go (golang), by Lucas Beyer (<http://lucasb.eyer.be/>).
