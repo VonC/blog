@@ -28,7 +28,7 @@ func main() {
 	}
 	defer f.Close()
 
-	img := createImage(size, limit, complex(0.3, 0.5))
+	img := createImage(size, limit, complex(0.312, 0.5))
 
 	if err = png.Encode(f, img); err != nil {
 		log.Fatal(err)
