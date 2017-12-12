@@ -29,20 +29,20 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
   - CPU
   - Memory
 
-Profiler pprof "Go Profiler Internals" (<https://stackimpact.com/blog/go-profiler-internals/>)
-from Dmitri Melikyan (<https://github.com/dmelikyan>) founder of StackImpact (<https://twitter.com/stackimpact>).
+Profiler pprof "**Go Profiler Internals**" (<https://stackimpact.com/blog/go-profiler-internals/>)
+from **Dmitri Melikyan** (<https://github.com/dmelikyan>) founder of **StackImpact** (<https://twitter.com/stackimpact>).
 
-Main example: "Using the Go execution tracer to speed up fractal rendering" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
+Main example: "**Using the Go execution tracer to speed up fractal rendering**" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
 <https://campoy.cat/blog/using-the-go-tracer-to-speed-up-fractal-making/>)
-from Francesc Campoy (<https://twitter.com/francesc>):
+from **Francesc Campoy** (<https://twitter.com/francesc>):
 
 - His code is at <https://github.com/campoy/justforfunc/tree/master/22-perf>
 - And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
 
 Based on code from <https://github.com/sfluor/fractcli>, authored
-by Salph Tabet (<https://github.com/sfluor>)  
+by **Salph Tabet** (<https://github.com/sfluor>)  
 It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
-with colors in go (golang), by Lucas Beyer (<http://lucasb.eyer.be/>).
+with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
 
 Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
 by **Karl Sims** (<http://www.karlsims.com/>)
