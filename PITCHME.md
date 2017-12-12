@@ -43,3 +43,6 @@ Based on code from <https://github.com/sfluor/fractcli>, authored
 by Salph Tabet (<https://github.com/sfluor>)  
 It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
 with colors in go (golang), by Lucas Beyer (<http://lucasb.eyer.be/>).
+
+Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
+by **Karl Sims** (<http://www.karlsims.com/>)
