@@ -12,7 +12,11 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceRoot}\\demo\\julia\\src\\julia_raw"
+                "cwd": "${workspaceRoot}\\demo\\julia\\src\\julia_raw",
+                "env": {
+                    "PATH": "${env:Path};${env:PRGS}\\go\\latest\\bin",
+                    "GOPATH": "${workspaceRoot}\\demo\\julia"
+                }
             }
         },
         {
