@@ -4,5 +4,7 @@
         "MD007": { "indent": 4},
         "MD033": { "allowed_elements": [ "a" ] }
     },
-    "markdown.extension.toc.levels": "1..3"
+    "markdown.extension.toc.levels": "1..3",
+    "go.inferGopath": false,
+    "go.gopath": "${workspaceRoot}\\demo\\julia"    
 }
