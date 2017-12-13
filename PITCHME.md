@@ -48,6 +48,9 @@ with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
 Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
 by **Karl Sims** (<http://www.karlsims.com/>)
 
+See also "**Profiling Go**" <http://www.integralist.co.uk/posts/profiling-go/>
+from **Mark McDonnell** (<https://twitter.com/integralist>)
+
 ## Performance Profiling
 
 2 big categories
@@ -63,8 +66,33 @@ pprof
 
 ### Event-based
 
+New pprof UI with Go 1.10
+See "**The new pprof user interface**" <https://rakyll.org/pprof-ui/> from rakyll
+
+It is a bit of an hassle to trigger the profiling, redirecting its output to a file
+(see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).  
+But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
+(<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
+
 Tracer (hooks)
 
 ## Steps
 
+### Dependencies
+
+Project **golang/dep** (<https://github.com/golang/dep>)
+from **Sam Boyer** (<https://twitter.com/sdboyer>).  
+See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
+
+```bash
+dep init
+dep ensure
+dep status -v
+```
+
 ### Add Profiling
+
+For the graphic GUI version of profiling, You will need:
+
+- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)  
+  Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>

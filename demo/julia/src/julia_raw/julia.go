@@ -8,6 +8,8 @@ import (
 	"log"
 	"math/cmplx"
 	"os"
+
+	"github.com/pkg/profile"
 )
 
 const (
@@ -18,6 +20,7 @@ const (
 )
 
 func main() {
+	defer profile.Start(profile.ProfilePath(".")).Stop()
 	// uncomment these lines to generate traces into stdout.
 	// trace.Start(os.Stdout)
 	// defer trace.Stop()
