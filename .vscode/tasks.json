@@ -17,7 +17,8 @@
                     "PATH": "${env:Path};${env:PRGS}\\go\\latest\\bin",
                     "GOPATH": "${workspaceRoot}\\demo\\julia"
                 }
-            }
+            },
+            "problemMatcher":"$go"
         },
         {
             "label": "julia_raw",
