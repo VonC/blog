@@ -20,10 +20,7 @@ const (
 )
 
 func main() {
-	defer profile.Start(profile.ProfilePath(".")).Stop()
-	// uncomment these lines to generate traces into stdout.
-	// trace.Start(os.Stdout)
-	// defer trace.Stop()
+	defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
 
 	f, err := os.Create(output)
 	if err != nil {

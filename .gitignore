@@ -8,3 +8,6 @@ hello
 *.zip
 bin/
 pkg/
+*.out
+*.pprof
+*.png
