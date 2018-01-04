@@ -53,12 +53,16 @@ from **Mark McDonnell** (<https://twitter.com/integralist>)
 
 ## Performance Profiling
 
-2 big categories
+2 big categories within APM Application Performance Management (<https://en.wikipedia.org/wiki/Application_performance_management>)
 
 - Statistical
 - Event-based
 
 <https://en.wikipedia.org/wiki/Profiling_(computer_programming)>
+
+<https://www.raymond.cc/blog/measure-time-taken-to-complete-a-batch-file-or-command-line-execution/>
+<https://code.google.com/archive/p/time-windows/source/default/source>
+<https://github.com/golang/benchmarks/blob/master/driver/driver_windows.go>
 
 ### Statistical
 
@@ -96,3 +100,9 @@ For the graphic GUI version of profiling, You will need:
 
 - "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)  
   Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
+
+### What do we see
+
+With pprf, only what is executed, each time we are asking the program.
+
+Abs.Cplx: <http://agniva.me/go/2017/08/27/fun-with-go-assembly.html>
