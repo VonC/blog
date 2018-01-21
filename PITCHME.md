@@ -13,33 +13,31 @@ You are doing a mission for a client who needs to optimize resources.
 Docker seems a good fit, but do you know what it entails?
 
 - [Docker 2017](#docker-2017)
-    - [Docker for a Contractor's client](#docker-for-a-contractors-client)
-        - [About Docker](#about-docker)
-        - [About this presentation](#about-this-presentation)
-        - [About me (Daniel)](#about-me-daniel)
-        - [About me (VonC)](#about-me-vonc)
-    - [What is Docker](#what-is-docker)
-        - [(What) Isolation vs. VM](#what-isolation-vs-vm)
-        - [Host vs. Guest](#host-vs-guest)
-        - [ContainerD, runc, CNCF, OCI, CRI-O, and Co](#containerd-runc-cncf-oci-cri-o-and-co)
-        - [What: Sumary](#what-sumary)
-    - [What for Docker](#what-for-docker)
-        - [Pass, saas, caas, clouds](#pass-saas-caas-clouds)
-        - [Orchestration](#orchestration)
-        - [Dev? Ops? DevOps](#dev-ops-devops)
-        - [What for: Sumary](#what-for-sumary)
-    - [What is against Docker](#what-is-against-docker)
-        - [Security](#security)
-        - [Moving target](#moving-target)
-        - [Legacy infrastructure & politics, licenses](#legacy-infrastructure-politics-licenses)
-        - [What against: Sumary](#what-against-sumary)
-    - [What is beyond Docker](#what-is-beyond-docker)
-        - [Persistent volumes](#persistent-volumes)
-        - [Swarm vs. Kubernetes](#swarm-vs-kubernetes)
-        - [Declarative approach (for all)](#declarative-approach-for-all)
-        - [What beyond: Sumary](#what-beyond-sumary)
-    - [Conclusion](#conclusion)
-        - [Training](#training)
+  - [Docker for a Contractor's client](#docker-for-a-contractors-client)
+    - [About Docker](#about-docker)
+    - [About this presentation](#about-this-presentation)
+    - [About me (Daniel)](#about-me-daniel)
+    - [About me (VonC)](#about-me-vonc)
+  - [What is Docker](#what-is-docker)
+    - [(What) Isolation vs. VM](#what-isolation-vs-vm)
+    - [Host vs. Guest](#host-vs-guest)
+    - [ContainerD, runc, CNCF, OCI, CRI-O, and Co](#containerd-runc-cncf-oci-cri-o-and-co)
+    - [What: Sumary](#what-sumary)
+  - [What for/against Docker](#what-foragainst-docker)
+    - [Pass, saas, caas, clouds](#pass-saas-caas-clouds)
+    - [But: Moving target](#but-moving-target)
+    - [Isolation](#isolation)
+    - [But: Security](#but-security)
+    - [Dev? Ops? DevOps](#dev-ops-devops)
+    - [But: Legacy infrastructure & politics, licenses](#but-legacy-infrastructure-politics-licenses)
+    - [What for/against: Sumary](#what-foragainst-sumary)
+  - [What is beyond Docker](#what-is-beyond-docker)
+    - [Persistent volumes](#persistent-volumes)
+    - [Orchestration](#orchestration)
+    - [Declarative approach (for all)](#declarative-approach-for-all)
+    - [What beyond: Sumary](#what-beyond-sumary)
+  - [Conclusion](#conclusion)
+    - [Training](#training)
 
 ---
 <!-- .slide: data-background="#030202" -->
@@ -47,8 +45,7 @@ Docker seems a good fit, but do you know what it entails?
 ### About Docker
 
 - What?
-- What for?
-- What against?
+- What for/against?
 - What beyond?
 
 +++
@@ -57,10 +54,14 @@ Docker seems a good fit, but do you know what it entails?
 
 - Available at [github.com](https://github.com/VonC/talks/blob/201710_docker/PITCHME.md)</a>
 - Available at [gitpitch.com](https://gitpitch.com/VonC/talks/201710_docker?grs=bitbucket)</a>
-- Available at intranet.softeam.com
+- Available at intranet.softeam.com:  
+  "[Docker chez un client? Coast Easy!](https://intranet.softeam.fr/node/2943)"
 - Fully annotated
 
 Note:
+
+You will find in the shownotes, or directly in the markdown article on GitHub
+additional information with each slides.
 
 Palette: <http://paletton.com/#uid=1000u0k004h0jin01bM5n02dm0p>
 
@@ -120,12 +121,18 @@ See "Docker containers vs. virtual machines: What’s the difference?" (<https:/
 
 +++
 
-#### Isolation
+#### Isolation vs. VM
 
 - No preemptive resource allocation
 - Use of namespaces
 - Reuse OS kernel/libs  
   (direct system calls)
+
+#### VM
+
+- Preemptive resource allocation
+- OS container
+- Use its own OS kernel (Hypervisor)
 
 Note:
 
@@ -143,15 +150,7 @@ Then `docker build -t myprogram . && docker run -it --rm hello`
 
 See also "CONTAINERS ARE NOT VMS" (<https://blog.docker.com/2016/03/containers-are-not-vms/>)
 
-+++
-
-#### VM
-
-- Preemptive resource allocation
-- OS container
-- Use its own OS kernel (Hypervisor)
-
-Note:
+On VM:
 
 See <https://blog.risingstack.com/operating-system-containers-vs-application-containers/>
 
@@ -230,21 +229,14 @@ Beware of the zombie process issue (link Stack Overflow)
 
 Where is docker installed?
 
-![Docker Container within a VM](assets/img/HostVM.png)
-
-Note:
-
-Your docker can be installed directly on your machine, or on a VM.
-
-+++
-
-#### Machine Host: actual machine
-
 Up to 3 levels!
 
 ![Docker Container within a VM on a machine](assets/img/HostActual.png)
 
 Note:
+
+Your docker can be installed directly on your machine, or on a VM.
+![Docker Container within a VM](assets/img/HostVM.png)
 
 See "How to access tomcat running in docker container from browser?"
 (<https://stackoverflow.com/a/27481832/6309>) as an example.
@@ -257,7 +249,13 @@ See "How to access tomcat running in docker container from browser?"
 A client want to access a container:  
 Where is the final client?
 
-![Docker: Where is the client?](assets/img/HostClients.png)
+Demo:
+
+```Dockerfile
+FROM scratch
+COPY hello(.exe) /
+ENTRYPOINT ["/hello(.exe)"]
+```
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
@@ -355,13 +353,18 @@ Adel explains:
 ---
 <!-- .slide: data-background="#030202" -->
 
-## What for Docker
+## What for/against Docker
 
-- paas, saas, caas, clouds
-- Orchestration
-- Dev? Ops? DevOps
+- paas, saas, caas, clouds  
+  vs. Moving target  
 
-![What for w30](assets/img/docker-pros.png)
+- Isolation  
+  vs. Security (VM Network)  
+
+- Dev? Ops? DevOps  
+  vs. Legacy
+
+![What for w20](assets/img/docker-pros.png) ![What Against w20 red](assets/img/docker-cons.png)
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
@@ -465,15 +468,11 @@ or <https://www.ibm.com/blogs/bluemix/2015/06/deploy-containers-premises-hybrid-
 
 Pro vs. Con: <https://www.spiceworks.com/it-articles/iaas-and-saas-vs-onprem/>, <http://rancher.com/devops-containers-prem-cloud/>
 
-+++
-
-#### Serverless
+#### Serverless2
 
 For transient function/application
 
 ![Serverless Example w50 bw](assets/img/serverlessExample.png)
-
-Note:
 
 References:
 
@@ -492,180 +491,97 @@ There is always a server:
 - even for "serverless"
 
 ---
-<!-- .slide: data-background="#1b1b1b" -->
 
-### Orchestration
+### But: Moving target
 
-One does not deploy just an application...  
-But a system.
+- Releases
+- Compatibilities (syntax)
+- Environments (Cloud)
 
-- Principle
-- Elements
-- Persistance
-
-Note:
-
-Source: <http://www.apiacademy.co/resources/api-management-302-using-an-api-gateway-in-microservice-architecture/>
-
-<https://www.slideshare.net/DanilvanGils/how-do-i-run-microservices-in-production-using-docker>
-
-From <https://www.slideshare.net/Dev_Events/building-next-gen-applications-and-microservices>
-
-- Containers:
-    - Encapsulates services and are accessible by IP/port combination
-- Service Discovery:
-    - Provide a way to know when Services have been added/removed and where they
-      are located.
-- Service Orchestration:
-    - Manages Service Topologies
-    - Ensures availability and utilization
-- API Gateway:
-    - Security
-    - Routing
+![Docker Moving w30](assets/img/docker-moving.jpg)
 
 +++
 
-#### Orchestration Principle
+#### Release: naming change
 
-![Orchestration w47](assets/img/orchestrationPrinciple.png)
+- Before x.y
+- After: 17.04, 17.05...
+- stable release every 3 months (03, 06, 09, 12)
+
+![Docker Moving](assets/img/docker-vlifecycle.png)
 
 Note:
+
+Cf. [My TL;DR: Docker Version/Name Change Highlights](https://www.bretfisher.com/docker-version-name-change-highlights/)
++++
+
+#### Compatibility
+
+- Beware of version
+- Dockerfile, compose file, ...
+
+![Docker Moving](assets/img/docker-compose-matrix.png)
 
 +++
 
-#### Orchestration elements
+#### Integration (Cloud)
 
-![Orchestration Elements](assets/img/orchestration-elements.png)
+Many environments available:
 
-Note:
-
-Source: [Democratizing orchestration with Docker](https://blog.jayway.com/2016/06/20/docker-1-12-orchestration/)
-
-+++
-
-#### Persistence
-
-- Bind mounts
-- Volumes
-- tmpfs (in memory)
-
-![Volume Mounts](assets/img/types-of-mounts.png)
-
-Note:
-
-Official documentation:
-
-- "[Use bind mounts](https://docs.docker.com/engine/admin/volumes/bind-mounts/)"
-- "[Use Volume mounts](https://docs.docker.com/engine/admin/volumes/volumes/)"
-- "[Use tmpfs mounts](https://docs.docker.com/engine/admin/volumes/tmpfs/)"
+![Docker Integration](assets/img/docker-integration.png)
 
 ---
 <!-- .slide: data-background="#5e5e5e" -->
 
-#### Orchestration Key: another system
+#### Moving target Key: Management
 
-- On top of docker, you need to monitor the orchestrator
-- That has an impact on your architecture
-- and you need to secure your persistence
+You will need to manage:
+
+- the delta
+- the wrappers
+- the support
 
 ---
+
 <!-- .slide: data-background="#1b1b1b" -->
 
-### Dev? Ops? DevOps
+### Isolation
 
-It is a culture.
+One application per server: not optimal.
 
-![DevOps Culture w57 bw](assets/img/devops_culture.png)
-
-Note:
-
-That is the end goal, but where do you start?
-
-Source: <https://martinfowler.com/bliki/DevOpsCulture.html>
-
-+++
-
-#### Docker Workflow
-
-![Docker Workflow w67](assets/img/docker-stages.png)
-
-+++
-
-#### Dev: 2 environments
-
-- Development environment
-- Execution environment
-
-But:
-
-- Limit the OS used |
-- Trace sudo commands |
-- Control the Docker images used |
+- Why
+- With VM
+- With VM and Containers
 
 Note:
 
-Where do you start? On the developer's workstation?.  
-Not sure: that is still tricky and requires:
-
-- convincing your Security department
-- restricting Docker image access
+<https://www.slideshare.net/LarryCover/baremetal-docker-containers-and-virtualization-the-growing-choices-for-cloud-applications/>
 
 +++
 
-#### Ops: Execution
+#### Isolation: why
 
-Execution Environment...
++++
 
-But also:
+#### Isolation: with VM
 
-- Docker Registry
-- ACL (or RBAC) |
-- deployment |
-- Monitoring |
-- Reporting |
++++
 
-Note:
-
-ELK stack 5Elasticsearch, Logstash, Kibana)
-Typically Splunk or Centreon for log coll
+#### Isolation: with VM and Containers
 
 ---
 <!-- .slide: data-background="#5e5e5e" -->
 
-#### DevOps Key: Collaboration
+#### Isolation: Key
 
-![That works on my Container w30](assets/img/worksOnMyContainer.png)
-
-Note:
-
-Source: <https://www.pinterest.com/pin/567242515558273751/>
-
----
-
-### What for: Sumary
-
-- Container as a Service:  
-  Between IAAS and PAAS
-- Orchestration:  
-  Manage containers between different nodes
-- Dev? Ops? DevOps:  
-  Culture change
-  
----
-<!-- .slide: data-background="#030202" -->
-
-## What is against Docker
-
-- Security (VM network)
-- Moving target
-- Legacy infrastructure & politics, licenses
-
-![What Against w30](assets/img/docker-cons.png)
+- Hardware resources optimization
+- Software resources independence
+- People resources collaboration
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
 
-### Security
+### But: Security
 
 - Patches
 - Broken isolation
@@ -762,59 +678,79 @@ drwx------ 19     999 root    4.0K Nov 13 10:07 postgres
 ---
 <!-- .slide: data-background="#1b1b1b" -->
 
-### Moving target
+### Dev? Ops? DevOps
 
-- Releases
-- Compatibilities (syntax)
-- Environments (Cloud)
+It is a culture.
 
-![Docker Moving w30](assets/img/docker-moving.jpg)
-
-+++
-
-#### Release: naming change
-
-- Before x.y
-- After: 17.04, 17.05...
-- stable release every 3 months (03, 06, 09, 12)
-
-![Docker Moving](assets/img/docker-vlifecycle.png)
+![DevOps Culture w57 bw](assets/img/devops_culture.png)
 
 Note:
 
-Cf. [My TL;DR: Docker Version/Name Change Highlights](https://www.bretfisher.com/docker-version-name-change-highlights/)
-+++
+That is the end goal, but where do you start?
 
-#### Compatibility
-
-- Beware of version
-- Dockerfile, compose file, ...
-
-![Docker Moving](assets/img/docker-compose-matrix.png)
+Source: <https://martinfowler.com/bliki/DevOpsCulture.html>
 
 +++
 
-#### Integration (Cloud)
+#### Docker Workflow
 
-Many environments available:
+![Docker Workflow w67](assets/img/docker-stages.png)
 
-![Docker Integration](assets/img/docker-integration.png)
++++
+
+#### Dev: 2 environments
+
+- Development environment
+- Execution environment
+
+But:
+
+- Limit the OS used |
+- Trace sudo commands |
+- Control the Docker images used |
+
+Note:
+
+Where do you start? On the developer's workstation?.  
+Not sure: that is still tricky and requires:
+
+- convincing your Security department
+- restricting Docker image access
+
++++
+
+#### Ops: Execution
+
+Execution Environment...
+
+But also:
+
+- Docker Registry
+- ACL (or RBAC) |
+- deployment |
+- Monitoring |
+- Reporting |
+
+Note:
+
+ELK stack 5Elasticsearch, Logstash, Kibana)
+Typically Splunk or Centreon for log coll
 
 ---
 <!-- .slide: data-background="#5e5e5e" -->
 
-#### Moving target Key: Management
+#### DevOps Key: Collaboration
 
-You will need to manage:
+![That works on my Container w30](assets/img/worksOnMyContainer.png)
 
-- the delta
-- the wrappers
-- the support
+Note:
+
+Source: <https://www.pinterest.com/pin/567242515558273751/>
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
 
-### Legacy infrastructure & politics, licenses
+### But: Legacy infrastructure & politics, licenses
 
 Change is hard.  
 You will have to convince:
@@ -879,14 +815,14 @@ Note:
 
 ---
 
-### What against: Sumary
+### What for/against: Sumary
 
-- Security:  
-  Patches, isolation, filesystem
-- Docker releases:  
-  Delta, wrapper, support
-- Legacy:  
-  Security, Administration, business (and licenses)
+- Container as a Service: Between IAAS and PAAS  
+  BUT: MOVING TARGET!
+- Isolation: Resource optimization/collaboration  
+  BUT: SECURITY!
+- Dev? Ops? DevOps: Culture change  
+  BUT: LEGACY!
   
 ---
 <!-- .slide: data-background="#030202" -->
@@ -894,7 +830,7 @@ Note:
 ## What is beyond Docker
 
 - Persistent volumes
-- Swarm vs. Kubernetes
+- Orchestration (Swarm vs. Kubernetes)
 - Declarative approach (for everything)
 
 ---
@@ -902,8 +838,8 @@ Note:
 
 ### Persistent volumes
 
-- stateless
-- stateful
+- Principle
+- stateless vs. stateful
 - drivers
 
 ![Docker Storage](assets/img/docker-storage.png)
@@ -911,6 +847,24 @@ Note:
 Note:
 
 Presentation: [Container Storage Best Practices in 2017 (RedHat)](https://www.slideshare.net/KeithResar/container-storage-best-practices-in-2017)
+
++++
+
+#### Persistence
+
+- Bind mounts
+- Volumes
+- tmpfs (in memory)
+
+![Volume Mounts](assets/img/types-of-mounts.png)
+
+Note:
+
+Official documentation:
+
+- "[Use bind mounts](https://docs.docker.com/engine/admin/volumes/bind-mounts/)"
+- "[Use Volume mounts](https://docs.docker.com/engine/admin/volumes/volumes/)"
+- "[Use tmpfs mounts](https://docs.docker.com/engine/admin/volumes/tmpfs/)"
 
 +++
 
@@ -989,7 +943,7 @@ Example: [Docker 1.12.1 Swarm Mode & Persistent Storage with DellEMC RexRay](htt
 ---
 <!-- .slide: data-background="#1b1b1b" -->
 
-### Swarm vs. Kubernetes
+### Orchestration
 
 Orchestration:
 
@@ -1000,6 +954,40 @@ Orchestration:
 ![Swarm Kubernetes w50](assets/img/swarm-kubernetes.png)
 
 Note:
+
+Source: <http://www.apiacademy.co/resources/api-management-302-using-an-api-gateway-in-microservice-architecture/>
+
+<https://www.slideshare.net/DanilvanGils/how-do-i-run-microservices-in-production-using-docker>
+
+From <https://www.slideshare.net/Dev_Events/building-next-gen-applications-and-microservices>
+
+- Containers:
+  - Encapsulates services and are accessible by IP/port combination
+- Service Discovery:
+  - Provide a way to know when Services have been added/removed and where they
+      are located.
+- Service Orchestration:
+  - Manages Service Topologies
+  - Ensures availability and utilization
+- API Gateway:
+  - Security
+  - Routing
+
+#### Orchestration Principle
+
+![Orchestration w47](assets/img/orchestrationPrinciple.png)
+
+#### Orchestration elements
+
+![Orchestration Elements](assets/img/orchestration-elements.png)
+
+Source: [Democratizing orchestration with Docker](https://blog.jayway.com/2016/06/20/docker-1-12-orchestration/)
+
+#### Orchestration Key: another system
+
+- On top of docker, you need to monitor the orchestrator
+- That has an impact on your architecture
+- and you need to secure your persistence
 
 See also "Kubernetes vs Docker Swarm vs DC/OS: May 2017 Orchestrator Shootout" (<https://www.linkedin.com/pulse/kubernetes-vs-docker-swarm-dcos-may-2017-orchestrator-arvind-soni>)
 
