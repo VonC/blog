@@ -12,6 +12,9 @@ section.present > p > img[alt="Chaffiol"], section.present > p > img[alt="VonC"]
 	margin: 12px 0px;
 }
 
+img[alt~="red"] {
+  border-color: #ff0000 !important;
+}
 img[alt~="w20"] {
   width: 20%;
 }
