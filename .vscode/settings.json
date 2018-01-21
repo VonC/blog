@@ -1,7 +1,7 @@
 {
     "markdownlint.config": {
         "MD009": { "br_spaces": 2 },
-        "MD007": { "indent": 4},
+        "MD007": { "indent": 2 },
         "MD033": { "allowed_elements": [ "a" ] }
     },
     "markdown.extension.toc.levels": "1..3"
