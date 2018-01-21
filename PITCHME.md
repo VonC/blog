@@ -364,7 +364,8 @@ Adel explains:
 - Dev? Ops? DevOps  
   vs. Legacy
 
-![What for w20](assets/img/docker-pros.png) ![What Against w20 red](assets/img/docker-cons.png)
+![What for w20](assets/img/docker-pros.png)
+![What Against w20 red](assets/img/docker-cons.png)
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
@@ -468,7 +469,7 @@ or <https://www.ibm.com/blogs/bluemix/2015/06/deploy-containers-premises-hybrid-
 
 Pro vs. Con: <https://www.spiceworks.com/it-articles/iaas-and-saas-vs-onprem/>, <http://rancher.com/devops-containers-prem-cloud/>
 
-#### Serverless2
+#### Serverless
 
 For transient function/application
 
