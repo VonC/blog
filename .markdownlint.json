@@ -1,6 +1,6 @@
 {
     "MD009": { "br_spaces": 2 },
-    "MD007": { "indent": 4 },
+    "MD007": { "indent": 2 },
     "MD033": { "allowed_elements": [ "a" ] },
     "MD029": { "style": "ordered" }
 }
