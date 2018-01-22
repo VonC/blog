@@ -562,13 +562,29 @@ Note:
 
 #### Isolation: why
 
+One application per server is not optimal.
+
+![Docker Moving](assets/img/server-charge.png)
+
+Note:
+
 +++
 
 #### Isolation: with VM
 
+Not all VMs are *fully* used.
+
+![Docker Moving](assets/img/server-vms.png)
+
+Note:
+
 +++
 
 #### Isolation: with VM and Containers
+
+Fine-grained resources limits.
+
+![Docker Moving](assets/img/server-containers.png)
 
 ---
 <!-- .slide: data-background="#5e5e5e" -->
