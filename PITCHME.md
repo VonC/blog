@@ -344,9 +344,11 @@ Adel explains:
 ### What: Sumary
 
 - Vm vs. Container (isolation):  
-  you need both
+  you need both  
+
 - Host vs. Guest:  
-  a container make kernel system calls
+  a container make kernel system calls  
+  
 - Architecture:  
   Modular
 
@@ -846,9 +848,110 @@ Note:
 
 ## What is beyond Docker
 
-- Persistent volumes
 - Orchestration (Swarm vs. Kubernetes)
+- Persistent volumes
 - Declarative approach (for everything)
+
+---
+<!-- .slide: data-background="#1b1b1b" -->
+
+### Orchestration
+
+Orchestration:
+
+- Swarm
+- Kubernetes
+- Now fully integrated?
+
+![Swarm Kubernetes w50](assets/img/swarm-kubernetes.png)
+
+Note:
+
+Source: <http://www.apiacademy.co/resources/api-management-302-using-an-api-gateway-in-microservice-architecture/>
+
+<https://www.slideshare.net/DanilvanGils/how-do-i-run-microservices-in-production-using-docker>
+
+From <https://www.slideshare.net/Dev_Events/building-next-gen-applications-and-microservices>
+
+- Containers:
+  - Encapsulates services and are accessible by IP/port combination
+- Service Discovery:
+  - Provide a way to know when Services have been added/removed and where they
+      are located.
+- Service Orchestration:
+  - Manages Service Topologies
+  - Ensures availability and utilization
+- API Gateway:
+  - Security
+  - Routing
+
+#### Orchestration Principle
+
+![Orchestration w47](assets/img/orchestrationPrinciple.png)
+
+#### Orchestration elements
+
+![Orchestration Elements](assets/img/orchestration-elements.png)
+
+Source: [Democratizing orchestration with Docker](https://blog.jayway.com/2016/06/20/docker-1-12-orchestration/)
+
+#### Orchestration Key: another system
+
+- On top of docker, you need to monitor the orchestrator
+- That has an impact on your architecture
+- and you need to secure your persistence
+
+See also "Kubernetes vs Docker Swarm vs DC/OS: May 2017 Orchestrator Shootout" (<https://www.linkedin.com/pulse/kubernetes-vs-docker-swarm-dcos-may-2017-orchestrator-arvind-soni>)
+
++++
+
+#### Swarm
+
+![Docker Swarm Orchestration w85](assets/img/Swarm.png)
+
+Note:
+
+Source: <https://thenewstack.io/containers-container-orchestration/>
+
+Swarm alone:
+
+- Gets you started
+- Invisible
+
++++
+
+#### Kubernetes
+
+![Kubernetes Swarm Orchestration w85](assets/img/Kubernetes.png)
+
+Note:
+
+Source: <https://thenewstack.io/containers-container-orchestration/>
+
+Kubernetes alone
+
+- More complex
+- More complete
+- More notions
+
+---
+<!-- .slide: data-background="#5e5e5e" -->
+
+#### Swarm vs. Kubernetes Key: Kubernetes
+
+- Probably the safest choice because it will cover every scenario
+- but still under heavy evolutions
+
+![Docker 2017bis: Kubernetes Integration w30](assets/img/dockerKubernetes.png)
+
+Note:
+
+See "DockerCon Europe 2017: Docker EE and CE to Include Kubernetes Integration" (<https://www.infoq.com/news/2017/10/docker-kubernetes-integration>)
+from  Daniel Bryant (<https://twitter.com/danielbryantu>)
+
+- only since 17.10
+- result of CRI-O and CNCF
+- so not always available
 
 ---
 <!-- .slide: data-background="#1b1b1b" -->
@@ -958,107 +1061,7 @@ Example: [Docker 1.12.1 Swarm Mode & Persistent Storage with DellEMC RexRay](htt
 - Depends on the stability
 
 ---
-<!-- .slide: data-background="#1b1b1b" -->
 
-### Orchestration
-
-Orchestration:
-
-- Swarm
-- Kubernetes
-- Now fully integrated?
-
-![Swarm Kubernetes w50](assets/img/swarm-kubernetes.png)
-
-Note:
-
-Source: <http://www.apiacademy.co/resources/api-management-302-using-an-api-gateway-in-microservice-architecture/>
-
-<https://www.slideshare.net/DanilvanGils/how-do-i-run-microservices-in-production-using-docker>
-
-From <https://www.slideshare.net/Dev_Events/building-next-gen-applications-and-microservices>
-
-- Containers:
-  - Encapsulates services and are accessible by IP/port combination
-- Service Discovery:
-  - Provide a way to know when Services have been added/removed and where they
-      are located.
-- Service Orchestration:
-  - Manages Service Topologies
-  - Ensures availability and utilization
-- API Gateway:
-  - Security
-  - Routing
-
-#### Orchestration Principle
-
-![Orchestration w47](assets/img/orchestrationPrinciple.png)
-
-#### Orchestration elements
-
-![Orchestration Elements](assets/img/orchestration-elements.png)
-
-Source: [Democratizing orchestration with Docker](https://blog.jayway.com/2016/06/20/docker-1-12-orchestration/)
-
-#### Orchestration Key: another system
-
-- On top of docker, you need to monitor the orchestrator
-- That has an impact on your architecture
-- and you need to secure your persistence
-
-See also "Kubernetes vs Docker Swarm vs DC/OS: May 2017 Orchestrator Shootout" (<https://www.linkedin.com/pulse/kubernetes-vs-docker-swarm-dcos-may-2017-orchestrator-arvind-soni>)
-
-+++
-
-#### Swarm
-
-![Docker Swarm Orchestration w85](assets/img/Swarm.png)
-
-Note:
-
-Source: <https://thenewstack.io/containers-container-orchestration/>
-
-Swarm alone:
-
-- Gets you started
-- Invisible
-
-+++
-
-#### Kubernetes
-
-![Kubernetes Swarm Orchestration w85](assets/img/Kubernetes.png)
-
-Note:
-
-Source: <https://thenewstack.io/containers-container-orchestration/>
-
-Kubernetes alone
-
-- More complex
-- More complete
-- More notions
-
----
-<!-- .slide: data-background="#5e5e5e" -->
-
-#### Swarm vs. Kubernetes Key: Kubernetes
-
-- Probably the safest choice because it will cover every scenario
-- but still under heavy evolutions
-
-![Docker 2017bis: Kubernetes Integration w30](assets/img/dockerKubernetes.png)
-
-Note:
-
-See "DockerCon Europe 2017: Docker EE and CE to Include Kubernetes Integration" (<https://www.infoq.com/news/2017/10/docker-kubernetes-integration>)
-from  Daniel Bryant (<https://twitter.com/danielbryantu>)
-
-- only since 17.10
-- result of CRI-O and CNCF
-- so not always available
-
----
 <!-- .slide: data-background="#1b1b1b" -->
 
 ### Declarative approach (for all)
@@ -1133,10 +1136,10 @@ Note:
 
 ### What beyond: Sumary
 
-- Peristence:  
-  Volume Drivers are evolving
 - Orchestrators:  
   Docker Swarm vs. Kubernetes
+- Persistence:  
+  Volume Drivers are evolving
 - Descriptive or Prescriptive:  
   text file, better ownership
 
