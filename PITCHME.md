@@ -32,8 +32,8 @@ Docker seems a good fit, but do you know what it entails?
     - [But: Legacy infrastructure & politics, licenses](#but-legacy-infrastructure-politics-licenses)
     - [What for/against: Sumary](#what-foragainst-sumary)
   - [What is beyond Docker](#what-is-beyond-docker)
-    - [Persistent volumes](#persistent-volumes)
     - [Orchestration](#orchestration)
+    - [Persistent volumes](#persistent-volumes)
     - [Declarative approach (for all)](#declarative-approach-for-all)
     - [What beyond: Sumary](#what-beyond-sumary)
   - [Conclusion](#conclusion)
@@ -121,7 +121,7 @@ See "Docker containers vs. virtual machines: What’s the difference?" (<https:/
 
 +++
 
-#### Isolation vs. VM
+#### Isolation
 
 - No preemptive resource allocation
 - Use of namespaces
