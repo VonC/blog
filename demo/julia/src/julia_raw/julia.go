@@ -73,3 +73,22 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 
 	return true, n
 }
+
+func fillImagePixel(img *image.RGBA, c complex128) {
+
+	mapColors := constructColorMap(limit, true)
+
+	for x := float64(0); x < size; x++ {
+		// Our go routine (we have to pass x as a value otherwise its value will change overtime)
+		// Check for our column
+		for y := float64(0); y < size; y++ {
+
+			go func(i, j float64) {
+				_, gap := InJulia(complex(3*x/size-1.5, 3*y/size-1.5), c, limit)
+				r, g, b := mapColors(gap)
+				// Set the color of our pixel
+				img.Set(int(x), int(y), color.RGBA{r, g, b, 255})
+			}(x, y)
+		}
+	}
+}
