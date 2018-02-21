@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -19,7 +21,17 @@ const (
 	colorized = true
 )
 
+var flagfill bool
+var flagfillgopixel bool
+var flagfillgorow bool
+
+func init() {
+	flag.BoolVar(&flagfill, "fill", false, "no go routine")
+	flag.BoolVar(&flagfillgopixel, "fillgopixel", false, "one go routine per pixel")
+	flag.BoolVar(&flagfillgorow, "fillgorow", false, "one go routine per row")
+}
 func main() {
+	flag.Parse()
 	defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
 
 	f, err := os.Create(output)
@@ -41,7 +53,15 @@ func createImage(size float64, limit float64, c complex128) *image.RGBA {
 	// initialize image
 	background := color.RGBA{0, 0, 0, 255}
 	draw.Draw(img, img.Bounds(), &image.Uniform{background}, image.ZP, draw.Src)
-	fillImage(img, c)
+	if flagfill {
+		fillImage(img, c)
+	} else if flagfillgopixel {
+		fillImagePixel(img, c)
+	} else if flagfillgorow {
+		fmt.Println("No implemented yet")
+	} else {
+		panic("flag fill missing")
+	}
 	return img
 }
 
