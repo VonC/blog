@@ -106,3 +106,7 @@ For the graphic GUI version of profiling, You will need:
 With pprf, only what is executed, each time we are asking the program.
 
 Abs.Cplx: <http://agniva.me/go/2017/08/27/fun-with-go-assembly.html>
+
+## Benchmark
+
+    go get -u golang.org/x/tools/cmd/benchcmp

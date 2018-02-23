@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -10,6 +9,7 @@ import (
 	"log"
 	"math/cmplx"
 	"os"
+	"sync"
 
 	"github.com/pkg/profile"
 )
@@ -58,7 +58,7 @@ func createImage(size float64, limit float64, c complex128) *image.RGBA {
 	} else if flagfillgopixel {
 		fillImagePixel(img, c)
 	} else if flagfillgorow {
-		fmt.Println("No implemented yet")
+		fillImageCol(img, c)
 	} else {
 		panic("flag fill missing")
 	}
@@ -97,18 +97,40 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 func fillImagePixel(img *image.RGBA, c complex128) {
 
 	mapColors := constructColorMap(limit, true)
-
+	var w sync.WaitGroup
+	w.Add(size * size)
 	for x := float64(0); x < size; x++ {
 		// Our go routine (we have to pass x as a value otherwise its value will change overtime)
 		// Check for our column
 		for y := float64(0); y < size; y++ {
 
 			go func(i, j float64) {
-				_, gap := InJulia(complex(3*x/size-1.5, 3*y/size-1.5), c, limit)
+				_, gap := InJulia(complex(3*i/size-1.5, 3*j/size-1.5), c, limit)
 				r, g, b := mapColors(gap)
 				// Set the color of our pixel
-				img.Set(int(x), int(y), color.RGBA{r, g, b, 255})
+				img.Set(int(i), int(j), color.RGBA{r, g, b, 255})
+				w.Done()
 			}(x, y)
 		}
+	}
+	w.Wait()
+}
+
+func fillImageCol(img *image.RGBA, c complex128) {
+
+	mapColors := constructColorMap(limit, true)
+
+	var w sync.WaitGroup
+	w.Add(size)
+	for x := float64(0); x < size; x++ {
+		go func(i float64) {
+			for y := float64(0); y < size; y++ {
+				_, gap := InJulia(complex(3*i/size-1.5, 3*y/size-1.5), c, limit)
+				r, g, b := mapColors(gap)
+				// Set the color of our pixel
+				img.Set(int(i), int(y), color.RGBA{r, g, b, 255})
+			}
+			w.Done()
+		}(x)
 	}
 }
