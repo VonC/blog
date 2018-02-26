@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -10,6 +11,7 @@ import (
 	"math/cmplx"
 	"os"
 	"sync"
+	"time"
 
 	"github.com/pkg/profile"
 )
@@ -24,15 +26,26 @@ const (
 var flagfill bool
 var flagfillgopixel bool
 var flagfillgorow bool
+var flagPCPU bool
+var flagPTrace bool
+var flagVerbose bool
 
 func init() {
 	flag.BoolVar(&flagfill, "fill", false, "no go routine")
 	flag.BoolVar(&flagfillgopixel, "fillgopixel", false, "one go routine per pixel")
 	flag.BoolVar(&flagfillgorow, "fillgorow", false, "one go routine per row")
+	flag.BoolVar(&flagPCPU, "pcpu", false, "CPU profiling")
+	flag.BoolVar(&flagPTrace, "ptrace", false, "Trace profiling")
+	flag.BoolVar(&flagVerbose, "verbose", false, "verbose (display duration)")
 }
 func main() {
 	flag.Parse()
-	defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
+	if flagPCPU {
+		defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
+	}
+	if flagPTrace {
+		defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
+	}
 
 	f, err := os.Create(output)
 	if err != nil {
@@ -53,6 +66,7 @@ func createImage(size float64, limit float64, c complex128) *image.RGBA {
 	// initialize image
 	background := color.RGBA{0, 0, 0, 255}
 	draw.Draw(img, img.Bounds(), &image.Uniform{background}, image.ZP, draw.Src)
+	start := time.Now()
 	if flagfill {
 		fillImage(img, c)
 	} else if flagfillgopixel {
@@ -61,6 +75,11 @@ func createImage(size float64, limit float64, c complex128) *image.RGBA {
 		fillImageCol(img, c)
 	} else {
 		panic("flag fill missing")
+	}
+	t := time.Now()
+	elapsed := t.Sub(start)
+	if flagVerbose {
+		fmt.Println("Duration", elapsed)
 	}
 	return img
 }

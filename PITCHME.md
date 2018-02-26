@@ -109,4 +109,28 @@ Abs.Cplx: <http://agniva.me/go/2017/08/27/fun-with-go-assembly.html>
 
 ## Benchmark
 
+<https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go>
+
     go get -u golang.org/x/tools/cmd/benchcmp
+    go test -bench=Simple
+    go test -bench=PerPixel
+    go test -bench=PerCol
+
+Note: time is monotonic since Go 1.9: <https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
+
+    100          31303975 ns/op
+
+- <https://github.com/golang/proposal/blob/master/design/14313-benchmark-format.md>
+- <https://github.com/cespare/prettybench>
+
+````(bash)
+> go test -bench=.
+goos: windows
+goarch: amd64
+pkg: julia_raw
+Benchmark_createImageSimple-4                 20          96612270 ns/op
+Benchmark_createImageGoPerPixel-4             20          99012575 ns/op
+Benchmark_createImageGoPerCol-4              100          13116665 ns/op
+PASS
+ok      julia_raw       7.462s
+````
