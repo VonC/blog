@@ -40,11 +40,18 @@ func init() {
 }
 func main() {
 	flag.Parse()
+	name := ""
+	if flagfillgopixel {
+		name = "pixel"
+	}
+	if flagfillgorow {
+		name = "row"
+	}
 	if flagPCPU {
-		defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
+		defer profile.Start(profile.CPUProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
 	}
 	if flagPTrace {
-		defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()
+		defer profile.Start(profile.TraceProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
 	}
 
 	f, err := os.Create(output)
@@ -152,4 +159,5 @@ func fillImageCol(img *image.RGBA, c complex128) {
 			w.Done()
 		}(x)
 	}
+	w.Wait()
 }

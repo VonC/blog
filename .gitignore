@@ -7,7 +7,7 @@
 hello
 *.zip
 bin/
-pkg/
+/demo/julia/pkg/
 *.out
 *.pprof
 *.png
