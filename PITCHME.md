@@ -73,10 +73,20 @@ pprof
 New pprof UI with Go 1.10
 See "**The new pprof user interface**" <https://rakyll.org/pprof-ui/> from rakyll
 
+See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
+
+    go tool pprof -http=:8080 cpu.pprof
+
 It is a bit of an hassle to trigger the profiling, redirecting its output to a file
 (see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).  
 But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
 (<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
+
+Alternative tool, with flamegraph support
+
+<https://github.com/google/pprof>
+
+    pprof.exe -http=:8080 cpu.pprof
 
 Tracer (hooks)
 
