@@ -82,7 +82,12 @@ It is a bit of an hassle to trigger the profiling, redirecting its output to a f
 But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
 (<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
 
-Alternative tool, with flamegraph support
+See "**PROFILING GO APPLICATIONS WITH FLAMEGRAPHS**" (<http://brendanjryan.com/golang/profiling/2018/02/28/profiling-go-applications.html>)"
+from **Brendan Ryan** (<https://twitter.com/brendan_j_ryan>) for the Uber approach
+to flamegraph.
+
+But this approach has now been superseded with the alternative `pprof` tool,
+with flamegraph support:
 
 <https://github.com/google/pprof>
 
