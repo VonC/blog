@@ -1,5 +1,88 @@
 # Go Profilling
 
+Performance profiling
+
+- [Go Profilling](#go-profilling)
+  - [Plan](#plan)
+  - [Why Profiling](#why-profiling)
+    - [For reporting](#for-reporting)
+    - [For testing](#for-testing)
+    - [For Measuring](#for-measuring)
+  - [Performance profiling](#performance-profiling)
+    - [setup](#setup)
+    - [CPU](#cpu)
+    - [Memory](#memory)
+    - [Problem](#problem)
+  - [Event-based profiling](#event-based-profiling)
+    - [Tracer](#tracer)
+    - [Goroutine vs. GC](#goroutine-vs-gc)
+    - [Trade-off](#trade-off)
+  - [Performance Profiling](#performance-profiling)
+    - [Statistical](#statistical)
+    - [Event-based](#event-based)
+  - [Steps](#steps)
+    - [Dependencies](#dependencies)
+    - [Add Profiling](#add-profiling)
+    - [What do we see](#what-do-we-see)
+  - [Benchmark](#benchmark)
+
+## Plan
+
+- Why Profiling
+- Performance Profiling
+- Event-based Profiling
+
+## Why Profiling
+
+- For Reporting
+- For Testing
+- For Measuring
+
+Note:
+
+What is profiling?
+
+3 kinds of profiling ("Performance Profiling" <http://thomas-solignac.com/blog/slides-talk-05-11-2017-performance-profiling/>
+from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
+
+### For reporting
+
+- Services continuous monitoring
+  - Availability
+  - Latency
+  - EventLog
+
+### For testing
+
+- Code Profiling
+  - Dependencies
+  - Code qualities (linters)
+  - Call Graph
+
+### For Measuring
+
+- Perfomance profiling
+  - CPU
+  - Memory
+
+## Performance profiling
+
+### setup
+
+### CPU
+
+### Memory
+
+### Problem
+
+## Event-based profiling
+
+### Tracer
+
+### Goroutine vs. GC
+
+### Trade-off
+
 Note:
 
 Testing techniques are numerous with Go: <https://speakerdeck.com/mitchellh/advanced-testing-with-go>
@@ -11,23 +94,6 @@ But it does not stop here:
   from DAMIEN LESPIAU (<https://twitter.com/__damien__>)
 - Profiling: it is even better with the Go 1.10: "The new pprof user interface"
   (<https://rakyll.org/pprof-ui/>) from Jaana Burcu Dogan (JBD), aka @rakyll (<https://twitter.com/rakyll>)
-
-But what is profiling?
-
-3 kinds of profiling ("Performance Profiling" <http://thomas-solignac.com/blog/slides-talk-05-11-2017-performance-profiling/>
-from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
-
-- Code Profiling
-  - Dependencies
-  - Code qualities (linters)
-  - Call Graph
-- Services continuous monitoring
-  - Availability
-  - Latency
-  - EventLog
-- Perfomance profiling
-  - CPU
-  - Memory
 
 Profiler pprof "**Go Profiler Internals**" (<https://stackimpact.com/blog/go-profiler-internals/>)
 from **Dmitri Melikyan** (<https://github.com/dmelikyan>)
