@@ -2,13 +2,20 @@
 
 Performance profiling
 
+Note:
+
 - [Go Profilling](#go-profilling)
   - [Plan](#plan)
+    - [About this presentation](#about-this-presentation)
+    - [About me (Daniel)](#about-me-daniel)
+    - [About me (VonC)](#about-me-vonc)
   - [Why Profiling](#why-profiling)
     - [For reporting](#for-reporting)
     - [For testing](#for-testing)
     - [For Measuring](#for-measuring)
   - [Performance profiling](#performance-profiling)
+    - [Example: Julia Set](#example-julia-set)
+    - [Event-based](#event-based)
     - [setup](#setup)
     - [CPU](#cpu)
     - [Memory](#memory)
@@ -17,20 +24,72 @@ Performance profiling
     - [Tracer](#tracer)
     - [Goroutine vs. GC](#goroutine-vs-gc)
     - [Trade-off](#trade-off)
-  - [Performance Profiling](#performance-profiling)
-    - [Statistical](#statistical)
-    - [Event-based](#event-based)
+  - [Event-based Profiling](#event-based-profiling)
   - [Steps](#steps)
-    - [Dependencies](#dependencies)
     - [Add Profiling](#add-profiling)
     - [What do we see](#what-do-we-see)
   - [Benchmark](#benchmark)
 
+---
+<!-- .slide: data-background="#030202" -->
+
 ## Plan
 
 - Why Profiling
-- Performance Profiling
-- Event-based Profiling
+- What: Performance Profiling
+- How: Event-based Profiling
+
++++
+
+### About this presentation
+
+- Available at [github.com](https://github.com/VonC/talks/blob/2018_goprofiling/PITCHME.md)</a>
+- Available at [gitpitch.com](https://gitpitch.com/VonC/talks/2018_goprofiling?grs=github)</a>
+- Available at intranet.softeam.com:  
+  "[Go Fractal, no bugs!!](https://intranet.softeam.fr/node/2904)" (Oct. 2017)
+- Fully annotated
+
+Note:
+
+You will find in the shownotes, or directly in the markdown article on GitHub
+additional information with each slides.
+
+Palette: <http://paletton.com/#uid=1000u0k004h0jin01bM5n02dm0p>
+
++++
+
+### About me (Daniel)
+
+![Chaffiol](assets/img/chaffiol.jpg)
+
+**Daniel CHAFFIOL** (Softeam)
+
+- Since 1999
+- Development architect
+- BNP, SGCIB, HSBC, Amundi
+
+Note:
+
+- Full CV: <https://stackoverflow.com/cv/vonc>
+
++++
+
+### About me (VonC)
+
+![VonC](assets/img/vonc.jpg)
+
+**VonC** (Stack Overflow)
+
+- Since 2008
+- 4th all-time user
+- Topics: Version Control (Git), Go, Docker
+
+Note:
+
+- Stack Overflow profile: <https://stackoverflow.com/users/6309/vonc>
+
+---
+<!-- .slide: data-background="#030202" -->
 
 ## Why Profiling
 
@@ -45,12 +104,16 @@ What is profiling?
 3 kinds of profiling ("Performance Profiling" <http://thomas-solignac.com/blog/slides-talk-05-11-2017-performance-profiling/>
 from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 
++++
+
 ### For reporting
 
 - Services continuous monitoring
   - Availability
   - Latency
   - EventLog
+
++++
 
 ### For testing
 
@@ -59,34 +122,102 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
   - Code qualities (linters)
   - Call Graph
 
+Note:
+
+Testing techniques are numerous with Go: <https://speakerdeck.com/mitchellh/advanced-testing-with-go>
+(Mitchell Hashimoto: <https://twitter.com/mitchellh>)
+
++++
+
 ### For Measuring
 
 - Perfomance profiling
   - CPU
   - Memory
 
+---
+
 ## Performance profiling
+
+APM:
+
+- Statistical
+- Event-based
+
+Note:
+
+2 big categories within APM Application Performance Management (<https://en.wikipedia.org/wiki/Application_performance_management>)
+
+<https://en.wikipedia.org/wiki/Profiling_(computer_programming)>
+
+<https://www.raymond.cc/blog/measure-time-taken-to-complete-a-batch-file-or-command-line-execution/>
+<https://code.google.com/archive/p/time-windows/source/default/source>
+<https://github.com/golang/benchmarks/blob/master/driver/driver_windows.go>
+
++++
+
+### Example: Julia Set
+
++++
+
+### Event-based
 
 ### setup
 
+- go dep
+- graphviz
+
+Note:
+
+#### Graph
+
+For the graphic GUI version of profiling, You will need:
+
+- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)  
+  Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
+
+#### Dependencies
+
+Project **golang/dep** (<https://github.com/golang/dep>)
+from **Sam Boyer** (<https://twitter.com/sdboyer>).  
+See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
+
+```bash
+dep init
+dep ensure
+dep status -v
+```
+
++++
+
 ### CPU
+
++++
 
 ### Memory
 
++++
+
 ### Problem
+
+---
 
 ## Event-based profiling
 
++++
+
 ### Tracer
 
++++
+
 ### Goroutine vs. GC
+
++++
 
 ### Trade-off
 
 Note:
 
-Testing techniques are numerous with Go: <https://speakerdeck.com/mitchellh/advanced-testing-with-go>
-(Mitchell Hashimoto: <https://twitter.com/mitchellh>)  
 But it does not stop here:
 
 - Code coverage: package by package, or (with the Go 1.10, for the all project: <https://github.com/golang/go/issues/16768>)
@@ -117,24 +248,7 @@ by **Karl Sims** (<http://www.karlsims.com/>)
 See also "**Profiling Go**" <http://www.integralist.co.uk/posts/profiling-go/>
 from **Mark McDonnell** (<https://twitter.com/integralist>)
 
-## Performance Profiling
-
-2 big categories within APM Application Performance Management (<https://en.wikipedia.org/wiki/Application_performance_management>)
-
-- Statistical
-- Event-based
-
-<https://en.wikipedia.org/wiki/Profiling_(computer_programming)>
-
-<https://www.raymond.cc/blog/measure-time-taken-to-complete-a-batch-file-or-command-line-execution/>
-<https://code.google.com/archive/p/time-windows/source/default/source>
-<https://github.com/golang/benchmarks/blob/master/driver/driver_windows.go>
-
-### Statistical
-
-pprof
-
-### Event-based
+## Event-based Profiling
 
 New pprof UI with Go 1.10
 See "**The new pprof user interface**" <https://rakyll.org/pprof-ui/> from rakyll
@@ -163,24 +277,7 @@ Tracer (hooks)
 
 ## Steps
 
-### Dependencies
-
-Project **golang/dep** (<https://github.com/golang/dep>)
-from **Sam Boyer** (<https://twitter.com/sdboyer>).  
-See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
-
-```bash
-dep init
-dep ensure
-dep status -v
-```
-
 ### Add Profiling
-
-For the graphic GUI version of profiling, You will need:
-
-- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)  
-  Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
 
 ### What do we see
 
