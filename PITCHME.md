@@ -45,7 +45,7 @@ Note:
 
 - Available at [github.com](https://github.com/VonC/talks/blob/2018_goprofiling/PITCHME.md)</a>
 - Available at [gitpitch.com](https://gitpitch.com/VonC/talks/2018_goprofiling?grs=github)</a>
-- Available at intranet.softeam.com:  
+- Available at intranet.softeam.com:
   "[Go Fractal, no bugs!!](https://intranet.softeam.fr/node/2904)" (Oct. 2017)
 - Fully annotated
 
@@ -154,9 +154,56 @@ Note:
 <https://code.google.com/archive/p/time-windows/source/default/source>
 <https://github.com/golang/benchmarks/blob/master/driver/driver_windows.go>
 
-+++
++++?image=http://dvdpedia.de/julia/julia1.png&size=auto 90%
 
 ### Example: Julia Set
+
+([Wikipedia](https://en.wikipedia.org/wiki/Julia_set))
+
++++
+
+#### Iterations
+
+![Iterations](https://www.youtube.com/embed/-V8HnG9XB2g)
+
++++
+
+#### Code Julia
+
+```go
+// InJulia checks if complex number c is in Julia z0 set
+func InJulia(z0, c complex128, n float64) (bool, float64) {
+  z := z0
+  for i := float64(0); i < n; i++ {
+    z = z*z + c
+    if cmplx.Abs(z) > 2 {
+      return false, i
+    }
+  }
+
+  return true, n
+}
+```
+
++++
+
+#### Code Loop
+
+```go
+func fillImage(img *image.RGBA, c complex128) {
+
+  mapColors := constructColorMap(limit, true)
+
+  for x := float64(0); x < size; x++ {
+    for y := float64(0); y < size; y++ {
+      _, gap := InJulia(complex(3*x/size-1.5, 3*y/size-1.5), c, limit)
+      r, g, b := mapColors(gap)
+      // Set the color of our pixel
+      img.Set(int(x), int(y), color.RGBA{r, g, b, 255})
+    }
+  }
+}
+```
 
 +++
 
@@ -173,13 +220,13 @@ Note:
 
 For the graphic GUI version of profiling, You will need:
 
-- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)  
+- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)
   Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
 
 #### Dependencies
 
 Project **golang/dep** (<https://github.com/golang/dep>)
-from **Sam Boyer** (<https://twitter.com/sdboyer>).  
+from **Sam Boyer** (<https://twitter.com/sdboyer>).
 See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
 
 ```bash
@@ -238,7 +285,7 @@ from **Francesc Campoy** (<https://twitter.com/francesc>):
 - And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
 
 Based on code from <https://github.com/sfluor/fractcli>, authored
-by **Salph Tabet** (<https://github.com/sfluor>)  
+by **Salph Tabet** (<https://github.com/sfluor>)
 It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
 with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
 
@@ -258,7 +305,7 @@ See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an
     go tool pprof -http=:8080 cpu.pprof
 
 It is a bit of an hassle to trigger the profiling, redirecting its output to a file
-(see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).  
+(see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).
 But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
 (<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
 

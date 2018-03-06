@@ -96,8 +96,6 @@ func fillImage(img *image.RGBA, c complex128) {
 	mapColors := constructColorMap(limit, true)
 
 	for x := float64(0); x < size; x++ {
-		// Our go routine (we have to pass x as a value otherwise its value will change overtime)
-		// Check for our column
 		for y := float64(0); y < size; y++ {
 			_, gap := InJulia(complex(3*x/size-1.5, 3*y/size-1.5), c, limit)
 			r, g, b := mapColors(gap)
