@@ -15,8 +15,7 @@ Note:
     - [For Measuring](#for-measuring)
   - [Performance profiling](#performance-profiling)
     - [Example: Julia Set](#example-julia-set)
-    - [Event-based](#event-based)
-    - [setup](#setup)
+    - [Tools](#tools)
     - [CPU](#cpu)
     - [Memory](#memory)
     - [Problem](#problem)
@@ -205,16 +204,61 @@ func fillImage(img *image.RGBA, c complex128) {
 }
 ```
 
+---
+
+### Tools
+
+- benchmark
+- Comparaison
+- pprof
+
 +++
 
-### Event-based
+#### benchmark code
 
-### setup
-
-- go dep
-- graphviz
+```go
+func Benchmark_createImageSimple(b *testing.B) {
+  c := complex(0.312, 0.5)
+  flagfill = true
+  for i := 0; i < b.N; i++ {
+    createImage(size, limit, c)
+  }
+  flagfill = false
+}
+```
 
 Note:
+
+See "How to write benchmarks in Go" from Dave Cheney
+<https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go>
+
++++
+
+#### benchmark test
+
+    go test -bench=Simple
+
+    Result:
+
+```bash
+> go test -bench=Simple
+goos: windows
+goarch: amd64
+pkg: julia_raw
+Benchmark_createImageSimple-4                 20          96912305 ns/op
+PASS
+ok      julia_raw       2.301s
+```
+
++++
+
+#### benchmarkcmp
+
+    go get -u golang.org/x/tools/cmd/benchcmp
+
+Note:
+
+    time is monotonic since Go 1.9: <https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
 
 #### Graph
 
