@@ -10,24 +10,19 @@ Note:
     - [About me (Daniel)](#about-me-daniel)
     - [About me (VonC)](#about-me-vonc)
   - [Why Profiling](#why-profiling)
-    - [For reporting](#for-reporting)
-    - [For testing](#for-testing)
-    - [For Measuring](#for-measuring)
+    - [For reporting (runtime)](#for-reporting-runtime)
+    - [For testing (static)](#for-testing-static)
+    - [For Measuring (runtime)](#for-measuring-runtime)
   - [Performance profiling](#performance-profiling)
     - [Example: Julia Set](#example-julia-set)
-    - [Tools](#tools)
+    - [Tools (benchmark, pprof)](#tools-benchmark-pprof)
     - [CPU](#cpu)
-    - [Memory](#memory)
     - [Problem](#problem)
   - [Event-based profiling](#event-based-profiling)
     - [Tracer](#tracer)
+    - [Tracer pprof](#tracer-pprof)
     - [Goroutine vs. GC](#goroutine-vs-gc)
     - [Trade-off](#trade-off)
-  - [Event-based Profiling](#event-based-profiling)
-  - [Steps](#steps)
-    - [Add Profiling](#add-profiling)
-    - [What do we see](#what-do-we-see)
-  - [Benchmark](#benchmark)
 
 ---
 <!-- .slide: data-background="#030202" -->
@@ -105,7 +100,7 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 
 +++
 
-### For reporting
+### For reporting (runtime)
 
 - Services continuous monitoring
   - Availability
@@ -114,7 +109,7 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 
 +++
 
-### For testing
+### For testing (static)
 
 - Code Profiling
   - Dependencies
@@ -128,11 +123,20 @@ Testing techniques are numerous with Go: <https://speakerdeck.com/mitchellh/adva
 
 +++
 
-### For Measuring
+### For Measuring (runtime)
 
 - Perfomance profiling
   - CPU
   - Memory
+
+Note:
+
+But it does not stop here:
+
+- **Code coverage**: package by package, or (with the Go 1.10,
+  for the all project: <https://github.com/golang/go/issues/16768>)
+- See "Building and using coverage-instrumented programs with Go (<http://damien.lespiau.name/2017/05/building-and-using-coverage.html>)
+  from DAMIEN LESPIAU (<https://twitter.com/__damien__>)
 
 ---
 
@@ -159,6 +163,11 @@ Note:
 
 ([Wikipedia](https://en.wikipedia.org/wiki/Julia_set))
 
+Note:
+
+Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
+by **Karl Sims** (<http://www.karlsims.com/>)
+
 +++
 
 #### Iterations
@@ -184,6 +193,13 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 }
 ```
 
+Note:
+
+Based on code from <https://github.com/sfluor/fractcli>, authored
+by **Salph Tabet** (<https://github.com/sfluor>)
+It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
+with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
+
 +++
 
 #### Code Loop
@@ -204,12 +220,21 @@ func fillImage(img *image.RGBA, c complex128) {
 }
 ```
 
+Note:
+
+Main example: "**Using the Go execution tracer to speed up fractal rendering**" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
+<https://campoy.cat/blog/using-the-go-tracer-to-speed-up-fractal-making/>)
+from **Francesc Campoy** (<https://twitter.com/francesc>):
+
+- His code is at <https://github.com/campoy/justforfunc/tree/master/22-perf>
+- And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
+
 ---
 
-### Tools
+### Tools (benchmark, pprof)
 
 - benchmark
-- Comparaison
+- comparison
 - pprof
 
 +++
@@ -250,6 +275,13 @@ PASS
 ok      julia_raw       2.301s
 ```
 
+Note:
+
+On understanding/improving benchmark format!
+
+- <https://github.com/golang/proposal/blob/master/design/14313-benchmark-format.md>
+- <https://github.com/cespare/prettybench>
+
 +++
 
 #### benchmarkcmp
@@ -258,46 +290,125 @@ ok      julia_raw       2.301s
 
 Note:
 
-    time is monotonic since Go 1.9: <https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
+Time is monotonic since Go 1.9:  
+<https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
 
 #### Graph
 
 For the graphic GUI version of profiling, You will need:
 
-- "**Graphviz - Graph Visualization Software**" (<https://graphviz.gitlab.io>)
+"**Graphviz - Graph Visualization Software**"  
+  (<https://graphviz.gitlab.io>)  
   Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
 
-#### Dependencies
+![GraphViz h50](https://graphviz.gitlab.io/_pages/Gallery/directed/cluster.png)
 
-Project **golang/dep** (<https://github.com/golang/dep>)
-from **Sam Boyer** (<https://twitter.com/sdboyer>).
-See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
++++
 
-```bash
-dep init
-dep ensure
-dep status -v
+#### pprof
+
+```go
+go tool pprof -http=8080 afile.pprof
 ```
+
+(image)
+
+Note:
+
+Profiling: it is even better with the Go 1.10: "The new pprof user interface"  
+(<https://rakyll.org/pprof-ui/>) from Jaana Burcu Dogan (JBD), aka @rakyll (<https://twitter.com/rakyll>)
+
+Profiler pprof "**Go Profiler Internals**" (<https://stackimpact.com/blog/go-profiler-internals/>)
+from **Dmitri Melikyan** (<https://github.com/dmelikyan>)
+founder of **StackImpact** (<https://twitter.com/stackimpact>).
+
+See also "**Profiling Go**" <http://www.integralist.co.uk/posts/profiling-go/>
+from **Mark McDonnell** (<https://twitter.com/integralist>)
 
 +++
 
 ### CPU
 
-+++
+```go
 
-### Memory
+  if flagPCPU {
+    defer profile.Start(profile.CPUProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
+  }
+  
+
+julia.exe -pcpu  
+
+go tool pprof -http=8080 afile.pprof
+```
+
+(demo)
+
+Note:
+
+It is a bit of an hassle to trigger the profiling, redirecting its output to a file
+(see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).
+But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
+(<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
 
 +++
 
 ### Problem
 
+(image)
+
+Note:
+
+With pprof, only what is executed, each time we are asking the program.
+
+See also Abs.Cplx  
+"An adventure in trying to optimize math.Atan2 with Go assembly": <http://agniva.me/go/2017/08/27/fun-with-go-assembly.html>
+
 ---
 
 ## Event-based profiling
 
+- tracer
+- goroutine
+- trade-off
+
 +++
 
 ### Tracer
+
+```go
+go test -bench=Simple
+go test -bench=PerPixel
+go test -bench=PerCol
+
+go tool trace -http=8080 afile.pprof
+```
+
+Note:
+
+Tracer (hooks)
+
+See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
+
+### Tracer pprof
+
+<https://github.com/google/pprof>
+
+```go
+pprof.exe -http=:8080 cpu.pprof
+```
+
+With flamegraph!
+
+(demo)
+
+Note:
+
+See "**PROFILING GO APPLICATIONS WITH FLAMEGRAPHS**" (<http://brendanjryan.com/golang/profiling/2018/02/28/profiling-go-applications.html>)"
+from **Brendan Ryan** (<https://twitter.com/brendan_j_ryan>) for the Uber approach
+to flamegraph.
+
+But this approach has now been superseded with the alternative `pprof` tool,
+with flamegraph support.
 
 +++
 
@@ -309,97 +420,12 @@ dep status -v
 
 Note:
 
-But it does not stop here:
+Project **golang/dep** (<https://github.com/golang/dep>)
+from **Sam Boyer** (<https://twitter.com/sdboyer>).
+See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
 
-- Code coverage: package by package, or (with the Go 1.10, for the all project: <https://github.com/golang/go/issues/16768>)
-- See "Building and using coverage-instrumented programs with Go (<http://damien.lespiau.name/2017/05/building-and-using-coverage.html>)
-  from DAMIEN LESPIAU (<https://twitter.com/__damien__>)
-- Profiling: it is even better with the Go 1.10: "The new pprof user interface"
-  (<https://rakyll.org/pprof-ui/>) from Jaana Burcu Dogan (JBD), aka @rakyll (<https://twitter.com/rakyll>)
-
-Profiler pprof "**Go Profiler Internals**" (<https://stackimpact.com/blog/go-profiler-internals/>)
-from **Dmitri Melikyan** (<https://github.com/dmelikyan>)
-founder of **StackImpact** (<https://twitter.com/stackimpact>).
-
-Main example: "**Using the Go execution tracer to speed up fractal rendering**" (<https://medium.com/@francesc/using-the-go-execution-tracer-to-speed-up-fractal-rendering-c06bb3760507>,
-<https://campoy.cat/blog/using-the-go-tracer-to-speed-up-fractal-making/>)
-from **Francesc Campoy** (<https://twitter.com/francesc>):
-
-- His code is at <https://github.com/campoy/justforfunc/tree/master/22-perf>
-- And a video demonstration is available at <https://www.youtube.com/watch?v=ySy3sR1LFCQ&feature=youtu.be&list=PL6>
-
-Based on code from <https://github.com/sfluor/fractcli>, authored
-by **Salph Tabet** (<https://github.com/sfluor>)
-It uses also <https://github.com/lucasb-eyer/go-colorful>, a library for playing
-with colors in go (golang), by **Lucas Beyer** (<http://lucasb.eyer.be/>).
-
-Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
-by **Karl Sims** (<http://www.karlsims.com/>)
-
-See also "**Profiling Go**" <http://www.integralist.co.uk/posts/profiling-go/>
-from **Mark McDonnell** (<https://twitter.com/integralist>)
-
-## Event-based Profiling
-
-New pprof UI with Go 1.10
-See "**The new pprof user interface**" <https://rakyll.org/pprof-ui/> from rakyll
-
-See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
-
-    go tool pprof -http=:8080 cpu.pprof
-
-It is a bit of an hassle to trigger the profiling, redirecting its output to a file
-(see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).
-But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
-(<https://github.com/davecheney>, <https://dave.cheney.net/>, <https://twitter.com/davecheney>)
-
-See "**PROFILING GO APPLICATIONS WITH FLAMEGRAPHS**" (<http://brendanjryan.com/golang/profiling/2018/02/28/profiling-go-applications.html>)"
-from **Brendan Ryan** (<https://twitter.com/brendan_j_ryan>) for the Uber approach
-to flamegraph.
-
-But this approach has now been superseded with the alternative `pprof` tool,
-with flamegraph support:
-
-<https://github.com/google/pprof>
-
-    pprof.exe -http=:8080 cpu.pprof
-
-Tracer (hooks)
-
-## Steps
-
-### Add Profiling
-
-### What do we see
-
-With pprf, only what is executed, each time we are asking the program.
-
-Abs.Cplx: <http://agniva.me/go/2017/08/27/fun-with-go-assembly.html>
-
-## Benchmark
-
-<https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go>
-
-    go get -u golang.org/x/tools/cmd/benchcmp
-    go test -bench=Simple
-    go test -bench=PerPixel
-    go test -bench=PerCol
-
-Note: time is monotonic since Go 1.9: <https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
-
-    100          31303975 ns/op
-
-- <https://github.com/golang/proposal/blob/master/design/14313-benchmark-format.md>
-- <https://github.com/cespare/prettybench>
-
-````(bash)
-> go test -bench=.
-goos: windows
-goarch: amd64
-pkg: julia_raw
-Benchmark_createImageSimple-4                 20          96612270 ns/op
-Benchmark_createImageGoPerPixel-4             20          99012575 ns/op
-Benchmark_createImageGoPerCol-4              100          13116665 ns/op
-PASS
-ok      julia_raw       7.462s
-````
+```bash
+dep init
+dep ensure
+dep status -v
+```
