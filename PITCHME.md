@@ -121,6 +121,24 @@ Note:
 Testing techniques are numerous with Go: <https://speakerdeck.com/mitchellh/advanced-testing-with-go>
 (Mitchell Hashimoto: <https://twitter.com/mitchellh>)
 
+Regarding dependencies:
+
+Project **golang/dep** (<https://github.com/golang/dep>)
+from **Sam Boyer** (<https://twitter.com/sdboyer>).
+See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
+
+```bash
+dep init
+dep ensure
+dep status -v
+```
+
+That help keeping only the dependencies you are actually using!  
+See for instance <https://twitter.com/tvii/status/968849694012137473>
+
+But don't forget the official project vgo,
+which might end up superseeding go dep: <https://github.com/golang/go/wiki/vgo>
+
 +++
 
 ### For Measuring (runtime)
@@ -193,6 +211,8 @@ func InJulia(z0, c complex128, n float64) (bool, float64) {
 }
 ```
 
+@[4-6](Mathematical part)
+
 Note:
 
 Based on code from <https://github.com/sfluor/fractcli>, authored
@@ -219,6 +239,9 @@ func fillImage(img *image.RGBA, c complex128) {
   }
 }
 ```
+
+@[5-7](Done for each pixel of the image)
+@[8-10](Colorize and fill the image)
 
 Note:
 
@@ -251,6 +274,9 @@ func Benchmark_createImageSimple(b *testing.B) {
   flagfill = false
 }
 ```
+
+@[1](Benchmark function)
+@[4-5](Loop for at least 1 second)
 
 Note:
 
@@ -305,13 +331,23 @@ For the graphic GUI version of profiling, You will need:
 
 +++
 
-#### pprof
+#### pprof CPU
 
 ```go
+  if flagPCPU {
+    defer profile.Start(profile.CPUProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
+  }
+
+julia.exe -pcpu  
+
 go tool pprof -http=8080 afile.pprof
 ```
 
-(image)
+@[1-3](Instrumentalisation)
+@[5](Generation)
+@[7](Utilization)
+
+(demo)
 
 Note:
 
@@ -325,26 +361,6 @@ founder of **StackImpact** (<https://twitter.com/stackimpact>).
 See also "**Profiling Go**" <http://www.integralist.co.uk/posts/profiling-go/>
 from **Mark McDonnell** (<https://twitter.com/integralist>)
 
-+++
-
-### CPU
-
-```go
-
-  if flagPCPU {
-    defer profile.Start(profile.CPUProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
-  }
-  
-
-julia.exe -pcpu  
-
-go tool pprof -http=8080 afile.pprof
-```
-
-(demo)
-
-Note:
-
 It is a bit of an hassle to trigger the profiling, redirecting its output to a file
 (see <https://groups.google.com/forum/#!topic/golang-nuts/YhnyJDI3IG0>).
 But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Cheney**
@@ -352,7 +368,33 @@ But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Ch
 
 +++
 
+#### pprof alternative
+
+```go
+go get -u github.com/google/ppro
+
+pprof.exe -http=:8080 cpu.pprof
+```
+
+With flamegraph!
+
+(image)
+
+Note:
+
+See "**PROFILING GO APPLICATIONS WITH FLAMEGRAPHS**" (<http://brendanjryan.com/golang/profiling/2018/02/28/profiling-go-applications.html>)"
+from **Brendan Ryan** (<https://twitter.com/brendan_j_ryan>) for the Uber approach
+to flamegraph.
+
+But this approach has now been superseded with the alternative `pprof` tool,
+with flamegraph support.
+
++++
+
 ### Problem
+
+Statistical approach leads to...  
+optimize math???
 
 (image)
 
@@ -376,12 +418,18 @@ See also Abs.Cplx
 ### Tracer
 
 ```go
-go test -bench=Simple
-go test -bench=PerPixel
-go test -bench=PerCol
+  if flagPTrace {
+    defer profile.Start(profile.TraceProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
+  }
+
+julia.exe -ptrace
 
 go tool trace -http=8080 afile.pprof
 ```
+
+@[1-3](Instrumentalisation)
+@[5](Generation)
+@[7](Utilization)
 
 Note:
 
@@ -389,43 +437,36 @@ Tracer (hooks)
 
 See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
 
-### Tracer pprof
-
-<https://github.com/google/pprof>
-
-```go
-pprof.exe -http=:8080 cpu.pprof
-```
-
-With flamegraph!
-
-(demo)
-
-Note:
-
-See "**PROFILING GO APPLICATIONS WITH FLAMEGRAPHS**" (<http://brendanjryan.com/golang/profiling/2018/02/28/profiling-go-applications.html>)"
-from **Brendan Ryan** (<https://twitter.com/brendan_j_ryan>) for the Uber approach
-to flamegraph.
-
-But this approach has now been superseded with the alternative `pprof` tool,
-with flamegraph support.
-
 +++
 
 ### Goroutine vs. GC
 
+Goroutines!
+
++++
+
+#### Goroutine First approach: Code
+
+One goroutine per pixel!!!
+
++++
+
+#### Goroutine First approach: Result
+
+One goroutine per pixel!!!
+
++++
+
+#### Goroutine Second approach: Code
+
+One goroutine per row!
+
++++
+
+#### Goroutine Second approach: Result
+
+One goroutine per row!
+
 +++
 
 ### Trade-off
-
-Note:
-
-Project **golang/dep** (<https://github.com/golang/dep>)
-from **Sam Boyer** (<https://twitter.com/sdboyer>).
-See "**So you want to write a package manager**" (<https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.740o43vxi>)
-
-```bash
-dep init
-dep ensure
-dep status -v
-```
