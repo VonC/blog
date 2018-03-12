@@ -396,7 +396,7 @@ pprof.exe -http=:8080 cpu.pprof
 
 With flamegraph!
 
-![Flamegraph Example h50](assets/img/flaemgraph.png)
+![Flamegraph Example h50](assets/img/flamegraph.png)
 
 Note:
 
