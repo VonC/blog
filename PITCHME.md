@@ -82,7 +82,7 @@ Note:
 
 - Stack Overflow profile: <https://stackoverflow.com/users/6309/vonc>
 
----
+---?image=assets/img/report-test-measure.jpg&size=auto 90%
 <!-- .slide: data-background="#030202" -->
 
 ## Why Profiling
@@ -98,9 +98,13 @@ What is profiling?
 3 kinds of profiling ("Performance Profiling" <http://thomas-solignac.com/blog/slides-talk-05-11-2017-performance-profiling/>
 from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 
+Image: <https://www.google.com/search?q=testing+reporting+measuring&client=firefox-b-ab&tbm=isch&tbs=rimg:Cc_1GCKcUsN5SIjiYLCvz1yy1Y7G-HNTf9ScDz2PBuawRGyrqARrgEERML5KstypjjauJT-tublrNDVxPvpvbDLiOyyoSCZgsK_1PXLLVjEcz4ApKACDT6KhIJsb4c1N_11JwMRmHQM62jKPvYqEgnPY8G5rBEbKhHXUot4qu17fyoSCeoBGuAQREwvEdi-BaFNW2VRKhIJkqy3KmONq4kRq8swlMDQ5R0qEglP625uWs0NXBFIwQmglQGuaSoSCU--m9sMuI7LEaBWLHZrxket&tbo=u&sa=X&ved=0ahUKEwiF5ei84ebZAhWE3KQKHSsACMQQ9C8IHA&biw=1600&bih=795&dpr=1#imgrc=z8YIpxSw3lIMgM:>
+
 +++
 
 ### For reporting (runtime)
+
+![report](assets/img/report.png)
 
 - Services continuous monitoring
   - Availability
@@ -110,6 +114,8 @@ from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 +++
 
 ### For testing (static)
+
+![report](assets/img/test.png)
 
 - Code Profiling
   - Dependencies
@@ -143,7 +149,9 @@ which might end up superseeding go dep: <https://github.com/golang/go/wiki/vgo>
 
 ### For Measuring (runtime)
 
-- Perfomance profiling
+![report](assets/img/measure.png)
+
+- Performance profiling
   - CPU
   - Memory
 
@@ -160,7 +168,10 @@ But it does not stop here:
 
 ## Performance profiling
 
-APM:
+APM  
+(Application Performance Management)
+
+![report](assets/img/performance.png)
 
 - Statistical
 - Event-based
@@ -175,17 +186,22 @@ Note:
 <https://code.google.com/archive/p/time-windows/source/default/source>
 <https://github.com/golang/benchmarks/blob/master/driver/driver_windows.go>
 
-+++?image=http://dvdpedia.de/julia/julia1.png&size=auto 90%
++++?image=assets/img/julia1.png&size=auto 90%
 
 ### Example: Julia Set
 
 ([Wikipedia](https://en.wikipedia.org/wiki/Julia_set))
+
+Quadratic mapping:
+
+$$z_{(n+1)}=z_n^2 + c$$
 
 Note:
 
 Cf. "**Understanding Julia and Mandelbrot Sets**" (<http://www.karlsims.com/julia.html>)
 by **Karl Sims** (<http://www.karlsims.com/>)
 
+Cf. "Wolfram MathWorld: Julia Set" (<http://mathworld.wolfram.com/JuliaSet.html>)
 +++
 
 #### Iterations
@@ -319,6 +335,8 @@ Note:
 Time is monotonic since Go 1.9:  
 <https://github.com/golang/proposal/blob/master/design/12914-monotonic.md>
 
+See "Analyzing benchmarks with ease using benchcmp and benchviz Golang" (<https://medium.com/@hackintoshrao/analyzing-benchmarks-with-ease-using-benchcmp-and-benchviz-golang-add607fc46d6>)
+
 #### Graph
 
 For the graphic GUI version of profiling, You will need:
@@ -327,7 +345,7 @@ For the graphic GUI version of profiling, You will need:
   (<https://graphviz.gitlab.io>)  
   Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
 
-![GraphViz h50](https://graphviz.gitlab.io/_pages/Gallery/directed/cluster.png)
+![GraphViz h50](assets/img/cluster.png)
 
 +++
 
@@ -371,14 +389,14 @@ But you have "**pkg/profile**" (<https://github.com/pkg/profile>) from **Dave Ch
 #### pprof alternative
 
 ```go
-go get -u github.com/google/ppro
+go get -u github.com/google/pprof
 
 pprof.exe -http=:8080 cpu.pprof
 ```
 
 With flamegraph!
 
-(image)
+![Flamegraph Example h50](assets/img/flaemgraph.png)
 
 Note:
 
