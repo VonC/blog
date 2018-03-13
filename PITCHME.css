@@ -5,6 +5,12 @@
   background: #ff0000;
 }
 
+#why-profiling {
+  background-color: green;
+}
+#why-profiling + ul {
+  background-color: green;
+}
 
 section.present > p > img[alt="Chaffiol"], section.present > p > img[alt="VonC"] {
 	position: absolute;
