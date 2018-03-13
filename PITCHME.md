@@ -85,15 +85,11 @@ Note:
 ---?image=assets/img/report-test-measure.jpg&size=auto 90%
 <!-- .slide: data-background="#030202" -->
 
-<span color:##e49436">
-
 ## Why Profiling
 
 - For Reporting
 - For Testing
 - For Measuring
-
-</span>
 
 Note:
 
