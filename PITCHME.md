@@ -10,17 +10,15 @@ Note:
     - [About me (Daniel)](#about-me-daniel)
     - [About me (VonC)](#about-me-vonc)
   - [Why Profiling](#why-profiling)
-    - [For reporting (runtime)](#for-reporting-runtime)
     - [For testing (static)](#for-testing-static)
+    - [For reporting (runtime)](#for-reporting-runtime)
     - [For Measuring (runtime)](#for-measuring-runtime)
   - [Performance profiling](#performance-profiling)
     - [Example: Julia Set](#example-julia-set)
     - [Tools (benchmark, pprof)](#tools-benchmark-pprof)
-    - [CPU](#cpu)
     - [Problem](#problem)
   - [Event-based profiling](#event-based-profiling)
     - [Tracer](#tracer)
-    - [Tracer pprof](#tracer-pprof)
     - [Goroutine vs. GC](#goroutine-vs-gc)
     - [Trade-off](#trade-off)
 
@@ -39,7 +37,7 @@ Note:
 
 - Available at [github.com](https://github.com/VonC/talks/blob/2018_goprofiling/PITCHME.md)</a>
 - Available at [gitpitch.com](https://gitpitch.com/VonC/talks/2018_goprofiling?grs=github)</a>
-- Available at intranet.softeam.com:
+- Available at intranet.softeam.com:  
   "[Go Fractal, no bugs!!](https://intranet.softeam.fr/node/2904)" (Oct. 2017)
 - Fully annotated
 
@@ -87,7 +85,7 @@ Note:
 
 ## Why Profiling
 
-- For Testing
+- For Testing  
   or:
 - For Reporting
 - For Measuring
@@ -313,7 +311,7 @@ See "How to write benchmarks in Go" from Dave Cheney
 goos: windows
 goarch: amd64
 pkg: julia_raw
-Benchmark_createImageSimple-4                 20          96912305 ns/op
+Benchmark_createImageSimple-4           20       96912305 ns/op
 PASS
 ok      julia_raw       2.301s
 ```
@@ -359,7 +357,7 @@ For the graphic GUI version of profiling, You will need:
 
 julia.exe -pcpu  
 
-go tool pprof -http=8080 afile.pprof
+go tool pprof -http=8080 cpu.pprof
 ```
 
 @[1-3](Instrumentalisation)
@@ -415,7 +413,7 @@ with flamegraph support.
 Statistical approach leads to...  
 optimize math???
 
-![pprof cpu](assets/img/pprof_cpu.png)
+![pprof cpu w35](assets/img/pprof_cpu.png)
 
 Note:
 
@@ -443,7 +441,7 @@ See also Abs.Cplx
 
 julia.exe -ptrace
 
-go tool trace -http=8080 afile.pprof
+go tool trace -http=8080 tracer.pprof
 ```
 
 @[1-3](Instrumentalisation)

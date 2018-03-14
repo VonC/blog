@@ -25,6 +25,9 @@ img[alt~="w20"] {
 img[alt~="w30"] {
   width: 30%;
 }
+img[alt~="w35"] {
+  width: 35%;
+}
 img[alt~="w47"] {
   width: 47%;
 }
