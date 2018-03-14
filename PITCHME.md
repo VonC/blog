@@ -87,8 +87,9 @@ Note:
 
 ## Why Profiling
 
-- For Reporting
 - For Testing
+  or:
+- For Reporting
 - For Measuring
 
 Note:
@@ -99,17 +100,6 @@ What is profiling?
 from Thomas Solignac <https://twitter.com/thomassolignac?lang=en>)
 
 Image: <https://www.google.com/search?q=testing+reporting+measuring&client=firefox-b-ab&tbm=isch&tbs=rimg:Cc_1GCKcUsN5SIjiYLCvz1yy1Y7G-HNTf9ScDz2PBuawRGyrqARrgEERML5KstypjjauJT-tublrNDVxPvpvbDLiOyyoSCZgsK_1PXLLVjEcz4ApKACDT6KhIJsb4c1N_11JwMRmHQM62jKPvYqEgnPY8G5rBEbKhHXUot4qu17fyoSCeoBGuAQREwvEdi-BaFNW2VRKhIJkqy3KmONq4kRq8swlMDQ5R0qEglP625uWs0NXBFIwQmglQGuaSoSCU--m9sMuI7LEaBWLHZrxket&tbo=u&sa=X&ved=0ahUKEwiF5ei84ebZAhWE3KQKHSsACMQQ9C8IHA&biw=1600&bih=795&dpr=1#imgrc=z8YIpxSw3lIMgM:>
-
-+++
-
-### For reporting (runtime)
-
-![report](assets/img/report.png)
-
-- Services continuous monitoring
-  - Availability
-  - Latency
-  - EventLog
 
 +++
 
@@ -144,6 +134,17 @@ See for instance <https://twitter.com/tvii/status/968849694012137473>
 
 But don't forget the official project vgo,
 which might end up superseeding go dep: <https://github.com/golang/go/wiki/vgo>
+
++++
+
+### For reporting (runtime)
+
+![report](assets/img/report.png)
+
+- Services continuous monitoring
+  - Availability
+  - Latency
+  - EventLog
 
 +++
 
@@ -345,7 +346,7 @@ For the graphic GUI version of profiling, You will need:
   (<https://graphviz.gitlab.io>)  
   Windows Packages: <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>
 
-![GraphViz h50](assets/img/cluster.png)
+![GraphViz h30](assets/img/cluster.png)
 
 +++
 
@@ -396,7 +397,7 @@ pprof.exe -http=:8080 cpu.pprof
 
 With flamegraph!
 
-![Flamegraph Example h50](assets/img/flamegraph.png)
+![Flamegraph Example w60](assets/img/flamegraph.png)
 
 Note:
 
@@ -414,7 +415,7 @@ with flamegraph support.
 Statistical approach leads to...  
 optimize math???
 
-(image)
+![pprof cpu](assets/img/pprof_cpu.png)
 
 Note:
 
