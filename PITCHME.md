@@ -355,7 +355,7 @@ For the graphic GUI version of profiling, You will need:
     defer profile.Start(profile.CPUProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
   }
 
-julia.exe -pcpu  
+julia_raw.exe -fill -pcpu  
 
 go tool pprof -http=8080 cpu.pprof
 ```
@@ -439,9 +439,9 @@ See also Abs.Cplx
     defer profile.Start(profile.TraceProfile, profile.ProfilePath("."), profile.NameProfile(name)).Stop()
   }
 
-julia.exe -ptrace
+julia_raw.exe -fill -ptrace
 
-go tool trace -http=8080 tracer.pprof
+go tool trace -http=:8080 trace.pprof
 ```
 
 @[1-3](Instrumentalisation)
@@ -454,7 +454,11 @@ Tracer (hooks)
 
 See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
 
-+++
++++?image=assets/img/trace_simple.png&size=auto 90%
+
+#### Resultat
+
+---
 
 ### Goroutine vs. GC
 
@@ -465,6 +469,24 @@ Goroutines!
 #### Goroutine First approach: Code
 
 One goroutine per pixel!!!
+
+```go
+func fillImagePixel(img *image.RGBA, c complex128) {
+  var w sync.WaitGroup
+  w.Add(size * size)
+  for x := float64(0); x < size; x++ {
+    for y := float64(0); y < size; y++ {
+      go func(i, j float64) {
+          ...
+          w.Done()
+      }(x, y)
+    }
+  }
+  w.Wait()
+```
+
+@[4-5](For every pixel)
+@[6-9](Call a lambda, assynchronously)
 
 +++
 
@@ -483,6 +505,27 @@ One goroutine per row!
 #### Goroutine Second approach: Result
 
 One goroutine per row!
+
+```go
+func fillImageCol(img *image.RGBA, c complex128) {
+
+  var w sync.WaitGroup
+  w.Add(size)
+  for x := float64(0); x < size; x++ {
+    go func(i float64) {
+      for y := float64(0); y < size; y++ {
+        ...
+      }
+      w.Done()
+    }(x)
+  }
+  w.Wait()
+}
+```
+
+@[5](For every row)
+@[6-7](Call a lambda, assynchronously)
+@[4,10](Adjust WaitGroup size)
 
 +++
 
