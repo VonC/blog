@@ -21,6 +21,7 @@ Note:
     - [Tracer](#tracer)
     - [Goroutine vs. GC](#goroutine-vs-gc)
     - [Trade-off](#trade-off)
+  - [Conclusion](#conclusion)
 
 ---
 <!-- .slide: data-background="#030202" -->
@@ -488,21 +489,13 @@ func fillImagePixel(img *image.RGBA, c complex128) {
 @[4-5](For every pixel)
 @[6-9](Call a lambda, assynchronously)
 
-+++
++++?image=assets/img/trace_pixel.png&size=auto 90%
 
 #### Goroutine First approach: Result
-
-One goroutine per pixel!!!
 
 +++
 
 #### Goroutine Second approach: Code
-
-One goroutine per row!
-
-+++
-
-#### Goroutine Second approach: Result
 
 One goroutine per row!
 
@@ -527,6 +520,45 @@ func fillImageCol(img *image.RGBA, c complex128) {
 @[6-7](Call a lambda, assynchronously)
 @[4,10](Adjust WaitGroup size)
 
++++?image=assets/img/trace_row.png&size=auto 90%
+
+#### Goroutine Second approach: Result
+
 +++
 
 ### Trade-off
+
+- Statistic vs. Events
+- concurrency vs. parallelism
+- Process vs. GC
+
+Note:
+
+"Modern garbage collection: A look at the Go GC strategy" <https://blog.plan99.net/modern-garbage-collection-911ef4f8bd8e>
+by Mike Hearn (Dec. 2016):  
+GC is made to optimise for pause times at the cost of absolutely every other
+desirable characteristic in a GC.
+
+"Go channels are bad and you should feel bad" by JT Olio
+(<https://www.jtolio.com/2016/03/go-channels-are-bad-and-you-should-feel-bad/>,
+<https://news.ycombinator.com/item?id=11210578>)  
+ communicating sequential processes (CSP)  (<https://en.wikipedia.org/wiki/Communicating_sequential_processes>)
+ cannot answer all cases.
+
+## Conclusion
+
+Go is worth exploring.
+
+- GoDoc
+- Static code analysis (linters)
+- Built-in testing and profiling framework
+- Race condition detection
+
+Notes:
+
+"Here are some amazing advantages of Go that you don’t hear much about"
+<https://medium.freecodecamp.org/here-are-some-amazing-advantages-of-go-that-you-dont-hear-much-about-1af99de3b23a>
+
+"Why Go?": <https://hackernoon.com/why-go-ef8850dc5f3c>
+
+"What’s changes in Golang 1.10": <https://medium.com/@thuc/whats-changes-in-golang-1-10-d3022fbade3c>
