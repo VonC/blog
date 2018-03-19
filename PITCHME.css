@@ -44,7 +44,7 @@ img[alt~="bw"] {
   background: white !important;
 }
 
-.reveal .slides > section.present {
+section.present > h4 {
   top: 0px !important;
   background: rgba(255,255,255,0.75) !important;
 }
