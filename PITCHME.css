@@ -44,7 +44,7 @@ img[alt~="bw"] {
   background: white !important;
 }
 
-section.present > h4 {
+section.present[style] {
   top: 0px !important;
   background: rgba(255,255,255,0.75) !important;
 }
