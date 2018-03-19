@@ -44,6 +44,11 @@ img[alt~="bw"] {
   background: white !important;
 }
 
+section[data-background-image~="trace_row.png"] {
+  top: 0px;
+  background: rgba(255,255,255,0.75) !important;
+}
+
 img[alt~="w50"] {
   width: 50%;
 }
