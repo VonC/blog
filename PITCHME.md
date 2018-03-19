@@ -545,6 +545,8 @@ desirable characteristic in a GC.
  communicating sequential processes (CSP)  (<https://en.wikipedia.org/wiki/Communicating_sequential_processes>)
  cannot answer all cases.
 
++++
+
 ## Conclusion
 
 Go is worth exploring.

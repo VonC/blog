@@ -44,8 +44,8 @@ img[alt~="bw"] {
   background: white !important;
 }
 
-section.present[data-background-image~="trace_row.png"] {
-  top: 0px;
+section.present[data-background-image~="png"] {
+  top: 0px !important;
   background: rgba(255,255,255,0.75) !important;
 }
 
