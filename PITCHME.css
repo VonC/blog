@@ -44,9 +44,17 @@ img[alt~="bw"] {
   background: white !important;
 }
 
-section.present[data-background-image~="png"][style] {
+section.present[style][data-background-image] {
   top: 0px !important;
   background: rgba(255,255,255,0.75) !important;
+}
+
+h3#example-julia-set {
+  color: #0058ff;
+}
+
+section.present[style][data-background-image] > h4 {
+  color: #0058ff;
 }
 
 img[alt~="w50"] {

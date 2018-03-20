@@ -556,7 +556,7 @@ Go is worth exploring.
 - Built-in testing and profiling framework
 - Race condition detection
 
-Notes:
+Note:
 
 "Here are some amazing advantages of Go that you don’t hear much about"
 <https://medium.freecodecamp.org/here-are-some-amazing-advantages-of-go-that-you-dont-hear-much-about-1af99de3b23a>
