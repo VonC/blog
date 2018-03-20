@@ -299,6 +299,9 @@ Note:
 See "How to write benchmarks in Go" from Dave Cheney
 <https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go>
 
+<https://stackoverflow.com/questions/35588474/what-does-allocs-op-and-b-op-mean-in-go-benchmark>
+<https://groups.google.com/forum/#!topic/golang-dev/ikl8MS7zCMs>
+
 +++
 
 #### benchmark test
