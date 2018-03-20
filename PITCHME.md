@@ -358,7 +358,7 @@ For the graphic GUI version of profiling, You will need:
 
 julia_raw.exe -fill -pcpu  
 
-go tool pprof -http=8080 cpu.pprof
+go tool pprof -http=:8080 cpu.pprof
 ```
 
 @[1-3](Instrumentalisation)
@@ -449,21 +449,31 @@ go tool trace -http=:8080 trace.pprof
 @[5](Generation)
 @[7](Utilization)
 
+(demo)
+
 Note:
 
 Tracer (hooks)
 
 See also <https://medium.com/@cep21/using-go-1-10-new-trace-features-to-debug-an-integration-test-1dc39e4e812d>
 
-+++?image=assets/img/trace_simple.png&size=auto 90%
++++?image=assets/img/trace_simple.png&size=auto 64%
 
-#### Resultat
+#### Result
 
 ---
 
-### Goroutine vs. GC
+### Goroutine
 
 Goroutines!
+
+Note:
+
+<http://nikgrozev.com/2015/07/14/overview-of-modern-concurrency-and-parallelism-concepts/>:
+"Overview of Modern Concurrency and Parallelism Concepts"
+
+<https://stackoverflow.com/questions/22621514/is-scalas-actors-similar-to-gos-coroutines>:
+Is Scala's actors similar to Go's goroutines?
 
 +++
 
@@ -488,8 +498,17 @@ func fillImagePixel(img *image.RGBA, c complex128) {
 
 @[4-5](For every pixel)
 @[6-9](Call a lambda, assynchronously)
+@[2-3](WaitGroup for synchronization)
 
-+++?image=assets/img/trace_pixel.png&size=auto 90%
+(demo)
+
++++?image=assets/img/trace_pixel.png&size=auto 80%
+
+Note:
+
+<https://en.wikipedia.org/wiki/Anonymous_function>:  
+Anonymous function (function literal, lambda abstraction, or lambda expression)
+is a function definition that is not bound to an identifier.
 
 #### Goroutine First approach: Result
 
@@ -520,7 +539,9 @@ func fillImageCol(img *image.RGBA, c complex128) {
 @[6-7](Call a lambda, assynchronously)
 @[4,10](Adjust WaitGroup size)
 
-+++?image=assets/img/trace_row.png&size=auto 90%
+(demo)
+
++++?image=assets/img/trace_row.png&size=auto 65%
 
 #### Goroutine Second approach: Result
 
