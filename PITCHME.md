@@ -19,7 +19,7 @@ Note:
     - [Problem](#problem)
   - [Event-based profiling](#event-based-profiling)
     - [Tracer](#tracer)
-    - [Goroutine vs. GC](#goroutine-vs-gc)
+    - [Goroutine](#goroutine)
     - [Trade-off](#trade-off)
   - [Conclusion](#conclusion)
 
@@ -507,13 +507,13 @@ func fillImagePixel(img *image.RGBA, c complex128) {
 
 +++?image=assets/img/trace_pixel.png&size=auto 80%
 
+#### Goroutine First approach: Result
+
 Note:
 
 <https://en.wikipedia.org/wiki/Anonymous_function>:  
 Anonymous function (function literal, lambda abstraction, or lambda expression)
 is a function definition that is not bound to an identifier.
-
-#### Goroutine First approach: Result
 
 +++
 
