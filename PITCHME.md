@@ -1,10 +1,10 @@
-# Go Profilling
+# Go Profiling
 
 Performance profiling
 
 Note:
 
-- [Go Profilling](#go-profilling)
+- [Go Profiling](#go-profiling)
   - [Plan](#plan)
     - [About this presentation](#about-this-presentation)
     - [About me (Daniel)](#about-me-daniel)
@@ -14,8 +14,8 @@ Note:
     - [For reporting (runtime)](#for-reporting-runtime)
     - [For Measuring (runtime)](#for-measuring-runtime)
   - [Performance profiling](#performance-profiling)
-    - [Example: Julia Set](#example-julia-set)
-    - [Tools (benchmark, pprof)](#tools-benchmark-pprof)
+    - [Example: Julia Set](#example--julia-set)
+    - [Tools (benchmark, pprof)](#tools-benchmark--pprof)
     - [Problem](#problem)
   - [Event-based profiling](#event-based-profiling)
     - [Tracer](#tracer)
