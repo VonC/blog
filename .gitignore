@@ -12,3 +12,4 @@ bin/
 *.pprof
 *.png
 !/assets/img/*.png
+juliaset.gif
