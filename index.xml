@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>VonC&#39;s Blog </title>
-		<link>https://vonc.github.io/</link>
+		<link>https://vonc.github.io/talks/</link>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<author>VonC</author>
@@ -11,10 +11,10 @@
 		
 		<item>
 			<title>Docker/Kubernetes outside your room</title>
-			<link>https://vonc.github.io/talks/docker-outside-your-room/</link>
+			<link>https://vonc.github.io/talks/talks/docker-outside-your-room/</link>
 			<pubDate>Wed, 10 Oct 2018 23:47:18 CEST</pubDate>
 			<author>VonC</author>
-			<guid>https://vonc.github.io/talks/docker-outside-your-room/</guid>
+			<guid>https://vonc.github.io/talks/talks/docker-outside-your-room/</guid>
 			<description>
 
 &lt;h1 id=&#34;docker-k8s-outside-your-room&#34;&gt;Docker/K8s &lt;em&gt;outside&lt;/em&gt; your room&lt;/h1&gt;
