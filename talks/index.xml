@@ -18,7 +18,7 @@
       
       <guid>https://vonc.github.io/talks/talks/docker-outside-your-room/</guid>
       <description>Docker/K8s outside your room Context You want to quickly test a docker image from an editor, say Artifactory.
-Since you don&amp;rsquo;t want to install all the pre-requisites for a Artifactory server to run, you pull the image, and docker run its container.</description>
+Since you don&amp;rsquo;t want to install all the pre-requisites for an Artifactory server to run, you &amp;ldquo;docker pull&amp;rdquo; the image, and &amp;ldquo;docker run&amp;rdquo; its container.</description>
     </item>
     
   </channel>

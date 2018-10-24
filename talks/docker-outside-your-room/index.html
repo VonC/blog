@@ -87,12 +87,12 @@
 
 <h2 id="context">Context</h2>
 
-<p>You want to quickly test a docker image from an editor, say Artifactory.<br />
-Since you don&rsquo;t want to install all the pre-requisites for a Artifactory server to run, you pull the image, and docker run its container.</p>
+<p>You want to quickly test a docker image from an editor, say <a href="https://jfrog.com/artifactory/">Artifactory</a>.<br />
+Since you don&rsquo;t want to install all the pre-requisites for an Artifactory server to run, you &ldquo;docker pull&rdquo; the image, and &ldquo;docker run&rdquo; its container.</p>
 
 <p>And it works!</p>
 
-<p>Even better, and upgrade is as easy as docker stop/pull/start!</p>
+<p>Even better, an upgrade is as easy as &ldquo;docker stop/pull/start&rdquo;!</p>
 
 <p>That is&hellip; until you deploy the same setup in your enterprise.<br />
 Then everything is more complex.</p>
@@ -110,11 +110,23 @@ Then everything is more complex.</p>
 
 <h3 id="proxy">proxy</h3>
 
+<p>You don&rsquo;t have a proxy in your room when you access internet&hellip; but you do in your company!</p>
+
 <h3 id="certificates">certificates</h3>
+
+<p>Remember https: that matters in an enterprise, in order to get point-to-point encryption. You probably ignore all that in your room&hellip; and stayed in http.</p>
 
 <h3 id="root-user">root user</h3>
 
+<p>Most editor images are using &ldquo;root&rdquo; in their own image.<br />
+That result in files produced as &ldquo;root&rdquo; on your computer. Which is fine, since your are root in your room.<br />
+Guess what: you won&rsquo;t <em>ever</em> be root in a company server!</p>
+
 <h3 id="data-persistence">Data Persistence</h3>
+
+<p>You can mount any host folder you want on your computer.<br />
+But you need to be careful in an enterprise. Not <em>all</em> users will be authorized to read/write those data.<br />
+And said data needs to be backed up.</p>
 
 		
 		<p><a class="mb3 pv2 ph3 ba bw1 black br-pill dib" href="https://vonc.github.io/slides/docker-outside-your-room/">Slides</a>

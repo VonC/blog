@@ -21,12 +21,12 @@
 
 &lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
 
-&lt;p&gt;You want to quickly test a docker image from an editor, say Artifactory.&lt;br /&gt;
-Since you don&amp;rsquo;t want to install all the pre-requisites for a Artifactory server to run, you pull the image, and docker run its container.&lt;/p&gt;
+&lt;p&gt;You want to quickly test a docker image from an editor, say &lt;a href=&#34;https://jfrog.com/artifactory/&#34;&gt;Artifactory&lt;/a&gt;.&lt;br /&gt;
+Since you don&amp;rsquo;t want to install all the pre-requisites for an Artifactory server to run, you &amp;ldquo;docker pull&amp;rdquo; the image, and &amp;ldquo;docker run&amp;rdquo; its container.&lt;/p&gt;
 
 &lt;p&gt;And it works!&lt;/p&gt;
 
-&lt;p&gt;Even better, and upgrade is as easy as docker stop/pull/start!&lt;/p&gt;
+&lt;p&gt;Even better, an upgrade is as easy as &amp;ldquo;docker stop/pull/start&amp;rdquo;!&lt;/p&gt;
 
 &lt;p&gt;That is&amp;hellip; until you deploy the same setup in your enterprise.&lt;br /&gt;
 Then everything is more complex.&lt;/p&gt;
@@ -44,11 +44,23 @@ Then everything is more complex.&lt;/p&gt;
 
 &lt;h3 id=&#34;proxy&#34;&gt;proxy&lt;/h3&gt;
 
+&lt;p&gt;You don&amp;rsquo;t have a proxy in your room when you access internet&amp;hellip; but you do in your company!&lt;/p&gt;
+
 &lt;h3 id=&#34;certificates&#34;&gt;certificates&lt;/h3&gt;
+
+&lt;p&gt;Remember https: that matters in an enterprise, in order to get point-to-point encryption. You probably ignore all that in your room&amp;hellip; and stayed in http.&lt;/p&gt;
 
 &lt;h3 id=&#34;root-user&#34;&gt;root user&lt;/h3&gt;
 
+&lt;p&gt;Most editor images are using &amp;ldquo;root&amp;rdquo; in their own image.&lt;br /&gt;
+That result in files produced as &amp;ldquo;root&amp;rdquo; on your computer. Which is fine, since your are root in your room.&lt;br /&gt;
+Guess what: you won&amp;rsquo;t &lt;em&gt;ever&lt;/em&gt; be root in a company server!&lt;/p&gt;
+
 &lt;h3 id=&#34;data-persistence&#34;&gt;Data Persistence&lt;/h3&gt;
+
+&lt;p&gt;You can mount any host folder you want on your computer.&lt;br /&gt;
+But you need to be careful in an enterprise. Not &lt;em&gt;all&lt;/em&gt; users will be authorized to read/write those data.&lt;br /&gt;
+And said data needs to be backed up.&lt;/p&gt;
 </description>
 		</item>
 		
