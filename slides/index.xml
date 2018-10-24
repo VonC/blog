@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slides on VonC&#39;s Blog</title>
+    <link>https://vonc.github.io/slides/</link>
+    <description>Recent content in Slides on VonC&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Oct 2018 23:54:27 +0200</lastBuildDate>
+    
+	<atom:link href="https://vonc.github.io/slides/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker/Kubernetes outside your room</title>
+      <link>https://vonc.github.io/slides/docker-outside-your-room/</link>
+      <pubDate>Wed, 10 Oct 2018 23:54:27 +0200</pubDate>
+      
+      <guid>https://vonc.github.io/slides/docker-outside-your-room/</guid>
+      <description>class: title, smokescreen, shelf, no-footer background-image: url(victoria-heath-597279-unsplash.jpg)
+Docker/Kubernetes outside your room Not that easy background-image: url(victoria-heath-597279-unsplash.jpg)
+background-image: url(venveo-609390-unsplash.jpg)
+class: img-left-right-full tt
+&amp;ndash;
+&amp;ndash;
+ Proxy  &amp;ndash;
+ Certificate  &amp;ndash;
+ Firewall  &amp;ndash;
+ LDAP/AD  About this presentation  Available at github.</description>
+    </item>
+    
+  </channel>
+</rss>

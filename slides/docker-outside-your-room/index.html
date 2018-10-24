@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="robots" content="noindex">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Docker/Kubernetes outside your room</title>
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="https://vonc.github.io/index.xml">
+		<link rel="canonical" href="https://vonc.github.io/slides/docker-outside-your-room/">
+		
+		<link rel="shortcut icon" type="image/png" href="https://vonc.github.io/apple-touch-icon-precomposed.png">
+		
+		
+		<meta name="generator" content="Hugo 0.49.2" />
+
+		
+		<meta name="og:title" content="Docker/Kubernetes outside your room" />
+		<meta name="og:type" content="article" />
+		<meta name="og:image" content="https://vonc.github.io/slides/docker-outside-your-room/room.jpg" />
+		<meta name="og:description" content="" />
+		<meta name="og:url" content="https://vonc.github.io/slides/docker-outside-your-room/" />
+		<meta name="og:site_name" content="Docker/Kubernetes outside your room" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@VonC_" />
+
+
+		
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/apron.css"></style>
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/adirondack.css"></style>
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/descartes.css"></style>
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/story.css"></style>
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/vonc.css"></style>
+					<link rel="stylesheet" type="text/css" href="https://vonc.github.io/css/docker-k8s-outside-room.css"></style><style type="text/css">
+		 
+		@page {
+				  size:  1216px 684px; 
+				  margin: 0;
+		}
+		</style>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i|Quattrocento:400,700|Spectral:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+		<script src="https://vonc.github.io/js/story.js"></script>
+
+	</head>
+	<body class="ma0 bg-white section-slides page-kind-page is-page-true  feature-depth feature-figcaption feature-hrdinkus feature-3dbook-covers feature-qrcode feature-3dbook-covers">
+		
+  
+
+		<main role="main">
+		
+    <textarea id="source">class: title, smokescreen, shelf, no-footer
+background-image: url(victoria-heath-597279-unsplash.jpg)
+
+# Docker/Kubernetes *outside*  your room
+
+## Not *that* easy
+
+---
+
+background-image: url(victoria-heath-597279-unsplash.jpg)
+
+---
+
+background-image: url(venveo-609390-unsplash.jpg)
+
+---
+
+class: img-left-right-full tt
+
+![your enterprise](venveo-609390-unsplash.jpg)
+
+--
+
+![your room](victoria-heath-597279-unsplash.jpg# middle)
+
+--
+
+- ![Proxy](browser.png) Proxy
+
+--
+
+- ![Certificate](padlock.png) Certificate
+
+--
+
+- ![Firewall](firewall.png) Firewall
+
+--
+
+- ![LDAP/AD](cloud.png) LDAP/AD
+
+---
+
+### About this presentation
+
+- Available at [github.com](https://github.com/VonC/talks/blob/201710_docker/PITCHME.md)
+- Available at intranet.softeam.com:  
+  &#34;[Docker outside your room? Not so Easy!](https://intranet.softeam.fr/node/2943)&#34;
+- Fully annotated
+
+Note:
+
+You will find in the shownotes (or directly in the markdown article on GitHub)
+additional information with each slides.
+
+Palette: &lt;http://paletton.com/#uid=1000u0k004h0jin01bM5n02dm0p&gt;
+
+---
+
+class: img-left, about1
+
+### About me (Daniel)
+
+![Chaffiol](/img/chaffiol.jpg# w-5)
+
+![Softeam Group](/img/softeam-group.jpg# w-3 fr)
+
+**Daniel CHAFFIOL** (Softeam)
+
+- Since 1999
+- Development architect
+- CV: &lt;https://stackoverflow.com/cv/vonc&gt;
+- clients:
+    - ![BNP-Paribas logo](/img/bnp-paribas.png# w-2) BNP(-Paribas)
+    - ![SGCIB logo](/img/sgcib.png# w-2) SGCIB
+    - ![HSBC logo](/img/hsbc.png# w-2) HSBC
+    - ![Amundi logo](/img/amundi.jpg# w-2) Amundi
+    - ![CACEIS logo](/img/caceis.jpg# w-2) CACEIS
+
+---
+
+class: img-right, about2
+
+### About me (VonC)
+
+![VonC](/img/vonc.jpg# w-5)
+
+![Stack Overflow logo](/img/stackoverflow2.png# w-5 fr bg-gray)
+
+**VonC** (Stack Overflow)
+
+- Since 2008
+- 4th all-time user
+- Page: [stackoverflow.com/users/6309/vonc](https://stackoverflow.com/users/6309/vonc)
+- Topics:
+    - ![Git SCM logo](/img/git.png# w-2) Version Control (Git)
+    - ![Golang logo](/img/go.png# w-2) Go
+    - ![Jenkins logo](/img/jenkins.png# w-2) Jenkins
+    - ![Docker logo](/img/docker.png# w-2) Docker
+    - ![Kubernetes logo](/img/kubernetes.png# w-2) Kubernetes
+
+???
+.qrcode.db.fr.w-10pct.ml-4[]
+
+Slides are at https://vonc.github.io/talks/ or you can scan the QR code.
+
+Contact:
+
+---
+
+class: img-left-right-full tt tools
+
+![your enterprise](venveo-609390-unsplash.jpg)
+
+![your room](victoria-heath-597279-unsplash.jpg# middle)
+
+--
+
+- ![GitLab logo](/img/gitlab.png# w-3) GitLab
+
+--
+
+- ![Artifactory logo](/img/artifactory.png# w-3) Artifactory
+
+--
+
+- ![Xray logo](/img/xray.png# w-3) Xray
+
+--
+
+- ![Sonarqube logo](/img/sonarqube.png# w-3) Sonarqube
+
+--
+
+- ![Jenkins logo](/img/jenkins.png# w-3) Jenkins
+
+---
+
+class: img-left-right-full tt problems
+
+![your enterprise](venveo-609390-unsplash.jpg)
+
+![your room](victoria-heath-597279-unsplash.jpg# middle)
+
+## Workarounds
+
+- ![Dockerfile](calendar.png) Image rebuild
+- ![Certificate](dns.png) https local services
+- ![Userns](tech-support.png) Data persistence (Userns)
+- ![Data](database.png) Service persistence (PVC/etcd)
+
+---
+
+class: workarounds
+
+### ![Dockerfile](calendar.png) Image rebuild
+
+Simple: extend the editor image by building your own!
+
+--
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM jenkins:2.138.1
+```
+
+]
+
+---
+
+class: workarounds
+
+### ![Dockerfile](calendar.png) Image rebuild (Example)
+
+Example: Add proxy to allow apt-install commands
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM jenkins:2.138.1
+
+*ARG http_proxy
+*ARG https_proxy
+*ENV http_proxy=${http_proxy}
+*ENV https_proxy=${https_proxy}
+
+RUN apt-get update &amp;&amp; apt-get install -y xxx
+```
+
+]
+
+---
+
+class: workarounds
+
+### ![Dockerfile](calendar.png) Image rebuild (But)
+
+Beware of secrets!
+
+```docker
+docker image history
+# or
+docker image inspect
+```
+
+---</textarea>
+    <script type="text/javascript" src="https://vonc.github.io/js/qrcode.js"></script>
+    <script src="https://vonc.github.io/js/remark.js"></script>
+    <script>
+      var slideshow = remark.create({
+          ratio: "16:9", 
+         navigation: {
+            scroll: false
+         },
+         countIncrementalSlides: false,
+         slideNumberFormat: '%current%',
+			highlightLanguage: "xaprb",
+			highlightLines: "true",
+			placeholder: "dummy value to end the list without a comma"
+      });
+
+		
+		
+		$(".remark-slide-content.fit-h1 h1").each(function(i, e) {
+			var $e = $(e);
+			var $p = $e.closest('div.remark-slide-container');
+			var needsToggle = !$p.hasClass('remark-visible');
+			if ( needsToggle ) $p.toggleClass('remark-visible');
+			while (e.scrollHeight > e.clientHeight + 1 && $e.css('font-size') != '1px') {
+				$e.css('font-size', (parseInt($e.css('font-size')) - 1) + "px");
+				
+				
+			}
+			if ( needsToggle ) $p.toggleClass('remark-visible');
+		});
+
+		$( function() {
+			if ( $( "body.feature-qrcode:not(.feature-noqrcode)" ).length ) {
+				if ( $( ".qrcode" ).length ) {
+					new QRCode($(".qrcode")[0], {
+						"useSVG": true,
+						"text": window.location.href.replace(/#\d*$/, "")
+					});
+				}
+			}
+		});
+
+    </script>
+
+		</main>
+		
+  
+
+		
+		
+  
+
+	
+	
+	</body>
+</html>

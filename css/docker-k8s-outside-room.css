@@ -1,0 +1,38 @@
+.remark-slide-content.img-left-right-full > p:nth-of-type(2) > img[src*=" middle"] {
+    object-position: initial;
+}
+
+.remark-slide-content.tools > ul {
+    line-height: 60px;
+    height: 85%;
+    padding-top: 0.1em;
+}
+
+.remark-slide-content.problems > h2 {
+    position: relative;
+    color: red;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding-left: 0.3em;
+}
+
+
+.remark-slide-content.problems > ul {
+    width: 60%;
+}
+
+.workarounds > h3 {
+    background-color: mediumturquoise;
+    color: black;
+}
+.workarounds > h3 > img {
+    vertical-align: middle;
+}
+
+.workarounds > pre {
+    background-color: mediumturquoise;
+    color: black;
+}
+
+.workarounds > .dockerfile {
+    background-color: #f6f8fa;
+}

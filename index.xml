@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>VonC&#39;s Blog </title>
+		<link>https://vonc.github.io/</link>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<author>VonC</author>
+		<rights>Copyright (c) 2018</rights>
+		<updated>2018-10-10 23:54:27 &#43;0200 CEST</updated>
+		
+		<item>
+			<title>Docker/Kubernetes outside your room</title>
+			<link>https://vonc.github.io/talks/docker-outside-your-room/</link>
+			<pubDate>Wed, 10 Oct 2018 23:47:18 CEST</pubDate>
+			<author>VonC</author>
+			<guid>https://vonc.github.io/talks/docker-outside-your-room/</guid>
+			<description>
+
+&lt;h1 id=&#34;docker-k8s-outside-your-room&#34;&gt;Docker/K8s &lt;em&gt;outside&lt;/em&gt; your room&lt;/h1&gt;
+
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+
+&lt;p&gt;You want to quickly test a docker image from an editor, say Artifactory.&lt;br /&gt;
+Since you don&amp;rsquo;t want to install all the pre-requisites for a Artifactory server to run, you pull the image, and docker run its container.&lt;/p&gt;
+
+&lt;p&gt;And it works!&lt;/p&gt;
+
+&lt;p&gt;Even better, and upgrade is as easy as docker stop/pull/start!&lt;/p&gt;
+
+&lt;p&gt;That is&amp;hellip; until you deploy the same setup in your enterprise.&lt;br /&gt;
+Then everything is more complex.&lt;/p&gt;
+
+&lt;h2 id=&#34;outside-your-room&#34;&gt;Outside your room&lt;/h2&gt;
+
+&lt;p&gt;This talk is about the difficulties you will face when deploying a containerized application in an enterprise, namely:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;proxy&lt;/li&gt;
+&lt;li&gt;certificates&lt;/li&gt;
+&lt;li&gt;root user&lt;/li&gt;
+&lt;li&gt;data persistence&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;proxy&#34;&gt;proxy&lt;/h3&gt;
+
+&lt;h3 id=&#34;certificates&#34;&gt;certificates&lt;/h3&gt;
+
+&lt;h3 id=&#34;root-user&#34;&gt;root user&lt;/h3&gt;
+
+&lt;h3 id=&#34;data-persistence&#34;&gt;Data Persistence&lt;/h3&gt;
+</description>
+		</item>
+		
+	</channel>
+</rss>
