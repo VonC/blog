@@ -207,7 +207,7 @@ class: img-left-right-full tt problems
 
 ---
 
-class: problems
+class: problems item1
 
 ## Workaround 1: Image Rebuild
 
@@ -298,7 +298,7 @@ docker image inspect
 
 ---
 
-class: problems
+class: problems item2
 
 ## Workaround 2: Certificates
 
@@ -381,7 +381,7 @@ for c in $(docker ps --format &#34;{{.Names}}&#34;); do (echo $c; \
 
 ---
 
-class: problems
+class: problems item3
 
 ## Workaround 3: Persistence
 
@@ -802,13 +802,13 @@ Idea: map internal account are relative to root
 .absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
 
 ```bash
-suvm-sles12-bac10:/etc # more subuid
+myserver:/etc # more subuid
 appgit:1158:65536
 appgitrd:1758:65536
 appgitpg:1718:65536
 
 appsonar:427680:65536
-suvm-sles12-bac10:/etc # more subgid
+myserver:/etc # more subgid
 appgit:540:65536
 appgitrd:656:65536
 appgitpg:655:65536
@@ -827,13 +827,13 @@ Idea: map internal account are relative to root
 .absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
 
 ```bash
-suvm-sles12-bac10:/etc # more subuid
+myserver:/etc # more subuid
 appgit:1158:65536
 *appgitrd:1758:65536 =&gt; 600
 *appgitpg:1718:65536 =&gt; 560
 
 appsonar:427680:65536
-suvm-sles12-bac10:/etc # more subgid
+myserver:/etc # more subgid
 appgit:540:65536
 *appgitrd:656:65536 =&gt; 116
 *appgitpg:655:65536 =&gt; 115
