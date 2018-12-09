@@ -11,7 +11,7 @@
 		<link rel="shortcut icon" type="image/png" href="https://vonc.github.io/talks/apple-touch-icon-precomposed.png">
 		
 		
-		<meta name="generator" content="Hugo 0.49.2" />
+		<meta name="generator" content="Hugo 0.51" />
 
 		
 		<meta name="og:title" content="Docker/Kubernetes outside your room" />
@@ -52,7 +52,8 @@
 
 		<main role="main">
 		
-    <textarea id="source">class: title, smokescreen, shelf, no-footer
+    <textarea id="source">
+class: title, smokescreen, shelf, no-footer
 background-image: url(victoria-heath-597279-unsplash.jpg)
 
 # Docker/Kubernetes *outside*  your room
@@ -83,15 +84,15 @@ class: img-left-right-full tt
 
 --
 
-- ![Certificate](padlock.png) Certificate
+- ![Certificate](padlock.png) HTTPS
 
 --
 
-- ![Firewall](firewall.png) Firewall
+- ![Firewall](firewall.png) Data
 
 --
 
-- ![LDAP/AD](cloud.png) LDAP/AD
+- ![LDAP/AD](cloud.png) Users
 
 ---
 
@@ -156,9 +157,10 @@ class: img-right, about2
 ???
 .qrcode.db.fr.w-10pct.ml-4[]
 
-Slides are at https://vonc.github.io/talks/ or you can scan the QR code.
+Slides are at &lt;https://vonc.github.io/talks/&gt; or you can scan the QR code.
 
-Contact:
+DarkOrange: &lt;https://www.color-hex.com/color/ff8c00&gt;
+Palette: &lt;http://paletton.com/palette.php?uid=50F0u0kw0w0iZDSo-yfyho-DUi%2B&gt;
 
 ---
 
@@ -196,12 +198,25 @@ class: img-left-right-full tt problems
 
 ![your room](victoria-heath-597279-unsplash.jpg# middle)
 
-## Workarounds
+### About Workarounds
 
 - ![Dockerfile](calendar.png) Image rebuild
-- ![Certificate](dns.png) https local services
-- ![Userns](tech-support.png) Data persistence (Userns)
-- ![Data](database.png) Service persistence (PVC/etcd)
+- ![Certificate](dns.png) Certificates
+- ![Data](database.png) Persistence (PVC/etcd)
+- ![Userns](tech-support.png) User namespace (Userns)
+
+---
+
+class: problems
+
+## Workaround 1: Image Rebuild
+
+Problem: enterprise elements missing
+
+- ![Dockerfile](calendar.png) Image rebuild
+- ![Certificate](dns.png) Certificates
+- ![Data](database.png) Persistence (PVC/etcd)
+- ![Userns](tech-support.png) User namespace (Userns)
 
 ---
 
@@ -225,7 +240,7 @@ FROM jenkins:2.138.1
 
 class: workarounds
 
-### ![Dockerfile](calendar.png) Image rebuild (Example)
+### ![Dockerfile](calendar.png) Image rebuild (build-args)
 
 Example: Add proxy to allow apt-install commands
 
@@ -236,6 +251,29 @@ FROM jenkins:2.138.1
 
 *ARG http_proxy
 *ARG https_proxy
+...
+...
+
+*RUN apt-get update &amp;&amp; apt-get install -y xxx
+```
+
+]
+
+---
+
+class: workarounds
+
+### ![Dockerfile](calendar.png) Image rebuild (envs)
+
+Example: Add persistent environment variables
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM jenkins:2.138.1
+
+ARG http_proxy
+ARG https_proxy
 *ENV http_proxy=${http_proxy}
 *ENV https_proxy=${https_proxy}
 
@@ -258,7 +296,591 @@ docker image history
 docker image inspect
 ```
 
----</textarea>
+---
+
+class: problems
+
+## Workaround 2: Certificates
+
+Problem: HTTPS and Security
+
+- ![Dockerfile](calendar.png) Image rebuild
+- ![Certificate](dns.png) https local services
+- ![Data](database.png) Service persistence (PVC/etcd)
+- ![Userns](tech-support.png) User namespace (Userns)
+
+---
+
+class: workarounds
+
+### ![Certificate](dns.png) Copy
+
+Simple: Copy your certificate, and update!
+
+--
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM jenkins:2.138.1
+
+*COPY ca.crt /usr/local/share/ca-certificates/ca.crt
+*RUN update-ca-certificates
+```
+
+]
+
+---
+
+class: workarounds
+
+### ![Certificate](dns.png) JDK Keystore
+
+But: Don&#39;t forget other keystores...
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM jenkins:2.138.1
+
+COPY ca.crt /usr/local/share/ca-certificates/ca.crt
+RUN update-ca-certificates
+
+*COPY company.cer
+*RUN cd /usr/lib/jvm/java-8-openjdk-amd64/ &amp;&amp; \
+*   bin/keytool -keystore jre/lib/security/cacerts \
+*          -storepass changeit -import -trustcacerts -noprompt \
+*          -file /var/jenkins_home/company.cer -alias company
+```
+
+]
+
+---
+
+class: workarounds
+
+### ![Certificate](dns.png) start wrapper script
+
+That is... if it is even possible to modify the image.
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+xray start
+sleep 3
+
+for c in $(docker ps --format &#34;{{.Names}}&#34;); do \
+*  docker cp /appxray/users/appxray/.jfrog/xray/ca-bundle.crt \
+            $c:/usr/local/share/ca-certificates; done
+for c in $(docker ps --format &#34;{{.Names}}&#34;); do (echo $c; \
+   docker exec -u root -t $c sh -c \
+*   &#39;if [ -e /usr/sbin/update-ca-certificates ]; then update-ca-certificates; fi&#39;); done
+```
+
+]
+
+---
+
+class: problems
+
+## Workaround 3: Persistence
+
+Problem: Backups!
+
+- ![Dockerfile](calendar.png) Image rebuild
+- ![Certificate](dns.png) https local services
+- ![Data](database.png) Service persistence (PVC/etcd)
+- ![Userns](tech-support.png) User namespace (Userns)
+
+---
+
+class: workarounds
+
+### ![Persistence](database.png) Backup for the application
+
+PV vs. PVC
+
+![PV and PVC](Kubernetes_PVC.png# w-9-12th)
+
+Source: Steve Watt, Red Hat
+
+???
+
+- &lt;https://kubernetes.io/docs/concepts/storage/persistent-volumes//&gt;
+- &lt;https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage//&gt;
+- &lt;https://thenewstack.io/strategies-running-stateful-applications-kubernetes-persistent-volumes-claims//&gt;
+
+That is:
+
+- A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes, but have a lifecycle independent of any individual pod that uses the PV.
+- A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., can be mounted once read/write or many times read-only).
+
+---
+
+class: workarounds
+
+### ![Persistence](database.png) Backup App Example
+
+Jenkins HOME
+
+![Jenkins PVC](k8s16-1.png# w-7-12th)
+
+Source: Charles Chukwudozie, Spr
+
+???
+
+- &lt;https://spr.com/provisioning-a-jenkins-instance-container-with-persistent-volume-in-azure-kubernetes-service/&gt;
+
+---
+
+class: workarounds
+
+### ![Persistence](database.png) Backup for Kubernetes(!)
+
+ETCD
+
+![K8s arch](kubernetes-arch2.png# w-3-12th)
+
+Source: Ian Lewis, Developer Advocate @ Google
+
+???
+
+- &lt;https://coreos.com/blog/migrating-applications-etcd-v3.html&gt;
+- &lt;https://www.ianlewis.org/en/how-kubeadm-initializes-your-kubernetes-master&gt;
+- &lt;https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/&gt;
+
+&gt; Always have a backup plan for etcd’s data for your Kubernetes cluster
+
+Cf. &lt;https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md&gt;
+
+Example of such tools: &lt;https://hackernoon.com/introducing-reshifter-for-kubernetes-backup-restore-migration-upgrade-ffaf78da36&gt;
+
+---
+
+class: workarounds
+
+### ![Persistence](database.png) Multiple master &#43; Backups
+
+Architecture:
+
+![K8s arch](ha-master-gce.png# w-8-12th bg-white)
+
+Source: Kubernetes
+
+???
+
+- &lt;https://blog.containership.io/multimaster/&gt;
+- &lt;https://kubernetes.io/docs/tasks/administer-cluster/highly-available-master/&gt;
+- &lt;https://velotio.com/blog/2018/6/15/kubernetes-high-availability-kubeadm&gt;
+
+---
+
+class: problems item4
+
+## Workaround 4: User namespace
+
+Problem: data owned by root or unknown account!?
+
+- ![Dockerfile](calendar.png) Image rebuild
+- ![Certificate](dns.png) https local services
+- ![Data](database.png) Service persistence (PVC/etcd)
+- ![Userns](tech-support.png) User namespace (Userns)
+
+---
+
+class: workarounds
+
+### Issue 1: unknown account on your disk
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+appxray@/appxray/users/appxray/.jfrog/xray:$ l
+total 4.0K
+drwxr-xr-x  7 appxray appxray   87 Nov 13 10:07 .
+drwxr-xr-x  2    1035    1035  128 Nov 13 10:07 xray-installer
+drwxr-xr-x 11    1035    1035  137 Nov 13 10:07 xray
+```
+
+]
+
+???
+
+As an illustration:
+
+- &lt;https://github.com/vitessio/vitess/issues/2772&gt;
+- &lt;https://github.com/apache/couchdb-docker/issues/71&gt;
+
+---
+
+class: workarounds
+
+### Issue 1: unknown *id* account on your disk
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+appxray@/appxray/users/appxray/.jfrog/xray:$ l
+total 4.0K
+drwxr-xr-x  7 appxray appxray   87 Nov 13 10:07 .
+*drwxr-xr-x  2    1035    1035  128 Nov 13 10:07 xray-installer
+*drwxr-xr-x 11    1035    1035  137 Nov 13 10:07 xray
+```
+
+]
+
+---
+
+class: workarounds
+
+### Issue 1: unknown account from the image
+
+Origin: this is the account used in Dockerfile image.
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+   gid=1035 group=xray uid=1035 user=xray \
+   /bin/sh -c groupadd -g ${gid} ${group} &amp;&amp;\
+              useradd -d /home/${USER} -u ${uid} -g ${gid} \
+                      -m -s /bin/bash ${user}
+```
+
+]
+
+???
+
+You can have a look in a Docker image history to see those lines.
+
+---
+
+class: workarounds
+
+### Issue 1: unknown account from the image, *hard-coded*
+
+Origin: It is hard-coded in the Docker image provided by the editor!?
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+*  gid=1035 group=xray uid=1035 user=xray \
+   /bin/sh -c groupadd -g ${gid} ${group} &amp;&amp;\
+              useradd -d /home/${USER} -u ${uid} -g ${gid} \
+                      -m -s /bin/bash ${user}
+```
+
+]
+
+---
+
+class: workarounds
+
+### Solution 1: define uid/gid
+
+Define the same user, but with your id, provided at build-time.
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM xray
+
+ARG xray-uid
+ARG xray-gid
+...
+RUN usermod -u ${xray-uid} xray &amp;&amp; groupmod -g ${xray-gid} xray
+...
+RUN find /opt/xray -user 1035 -exec chown xray {} \;
+RUN find /opt/xray -group 1035 -exec chgrp -h xray {} \;
+```
+
+]
+
+---
+
+class: workarounds
+
+### Solution 1: define uid/gid with build-args
+
+ `docker build --build-arg xray-uid=1234 xray-gid=1678`
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM xray
+
+*ARG xray-uid
+*ARG xray-gid
+...
+RUN usermod -u ${xray-uid} xray &amp;&amp; groupmod -g ${xray-gid} xray
+...
+RUN find /opt/xray -user 1035 -exec chown xray {} \;
+RUN find /opt/xray -group 1035 -exec chgrp -h xray {} \;
+```
+
+]
+
+???
+
+The documentation: &lt;https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg/&gt;
+
+---
+
+class: workarounds
+
+### Solution 1: define uid/gid, modifing the existing account
+
+You need to change its uid/gid
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM xray
+
+ARG xray-uid
+ARG xray-gid
+...
+*RUN usermod -u ${xray-uid} xray &amp;&amp; groupmod -g ${xray-gid} xray
+...
+RUN find /opt/xray -user 1035 -exec chown xray {} \;
+RUN find /opt/xray -group 1035 -exec chgrp -h xray {} \;
+```
+
+]
+
+---
+
+class: workarounds
+
+### Solution 1: define uid/gid *and* change existing files
+
+... And pray you don&#39;t overlook any file created with the account.
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```Docker
+FROM xray
+
+ARG xray-uid
+ARG xray-gid
+...
+RUN usermod -u ${xray-uid} xray &amp;&amp; groupmod -g ${xray-gid} xray
+...
+*RUN find /opt/xray -user 1035 -exec chown xray {} \;
+*RUN find /opt/xray -group 1035 -exec chgrp -h xray {} \;
+```
+
+]
+
+---
+
+class: workarounds
+
+### Issue 2: root
+
+Origin: By default, a Dockerfile and Docker use `root`
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+appxray@/appxray/users/appxray/.jfrog/xray:$ l
+total 4.0K
+drwxr-xr-x  3 appxray appxray   18 Nov 10 14:45 ..
+drwxr-xr-x  5 root    root      44 Nov 13 10:07 mongodb
+drwxr-xr-x  3     999 root      42 Nov 13 10:07 rabbitmq
+drwxr-xr-x  7 appxray appxray   87 Nov 13 10:07 .
+drwxr-xr-x  2    1035    1035  128 Nov 13 10:07 xray-installer
+drwxr-xr-x 11    1035    1035  137 Nov 13 10:07 xray
+drwx------ 19     999 root    4.0K Nov 13 10:07 postgres
+```
+
+]
+
+---
+
+class: workarounds
+
+### Issue 2: root on your disk
+
+That means, you cannot access root files/folders
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+appxray@/appxray/users/appxray/.jfrog/xray:$ l
+total 4.0K
+drwxr-xr-x  3 appxray appxray   18 Nov 10 14:45 ..
+*drwxr-xr-x  5 root    root      44 Nov 13 10:07 mongodb
+*drwxr-xr-x  3     999 root      42 Nov 13 10:07 rabbitmq
+drwxr-xr-x  7 appxray appxray   87 Nov 13 10:07 .
+drwxr-xr-x  2    1035    1035  128 Nov 13 10:07 xray-installer
+drwxr-xr-x 11    1035    1035  137 Nov 13 10:07 xray
+*drwx------ 19     999 root    4.0K Nov 13 10:07 postgres
+```
+
+]
+
+---
+
+class: workarounds
+
+### Possible workaround: Unserns
+
+Idea: map internal root account to external technical account
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+myserver:/etc # more subuid
+appgit:1158:65536
+
+myserver:/etc # more subgid
+appgit:540:65536
+```
+
+]
+
+---
+
+class: workarounds
+
+### Possible workaround: `--userns-remmap`
+
+`docker daemon --userns-remap [uid[:gid]]`
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+more /etc/sysconfig/docker
+
+## Path           : System/Management
+## Description    : Extra cli switches for docker daemon
+## ServiceRestart : docker
+#
+DOCKER_OPTS=&#34;-H tcp://127.0.0.1:5000 -H tcp://10.198.xx.xx:5000 \
+             -H unix:///var/run/docker.sock \
+             --userns-remap=\&#34;appgit:appgit\&#34;&#34;
+```
+
+]
+
+???
+
+Example: &lt;https://www.jujens.eu/posts/en/2017/Jul/02/docker-userns-remap/&gt;
+
+---
+
+class: workarounds
+
+### Possible workaround: `--userns-remmap uid:gig`
+
+The external technical account `appgit` is `root` in the container
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+more /etc/sysconfig/docker
+
+## Path           : System/Management
+## Description    : Extra cli switches for docker daemon
+## ServiceRestart : docker
+#
+DOCKER_OPTS=&#34;-H tcp://127.0.0.1:5000 -H tcp://10.198.xx.xx:5000 \
+             -H unix:///var/run/docker.sock \
+*            --userns-remap=\&#34;appgit:appgit\&#34;&#34;
+```
+
+]
+
+---
+
+class: workarounds
+
+### But: quid of multiple accounts
+
+Idea: map internal account are relative to root
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+suvm-sles12-bac10:/etc # more subuid
+appgit:1158:65536
+appgitrd:1758:65536
+appgitpg:1718:65536
+
+appsonar:427680:65536
+suvm-sles12-bac10:/etc # more subgid
+appgit:540:65536
+appgitrd:656:65536
+appgitpg:655:65536
+```
+
+]
+
+---
+
+class: workarounds
+
+### But: quid of multiple accounts? Delta
+
+Idea: map internal account are relative to root
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+suvm-sles12-bac10:/etc # more subuid
+appgit:1158:65536
+*appgitrd:1758:65536 =&gt; 600
+*appgitpg:1718:65536 =&gt; 560
+
+appsonar:427680:65536
+suvm-sles12-bac10:/etc # more subgid
+appgit:540:65536
+*appgitrd:656:65536 =&gt; 116
+*appgitpg:655:65536 =&gt; 115
+```
+
+]
+
+---
+
+class: workarounds
+
+### But: quid of multualized environment
+
+Same machine, different image/application.
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+dev-server:/appsonar # l /docker/1158.540/volumes/.../_data/
+total 4.0K
+-rw-r--r-- 1   2157   1539 115 Sep 25  2017 README.txt
+drwxr-xr-x 1 appgit appgit  10 Oct  4 13:26 ..
+drwxr-xr-x 1   2157   1539  20 Oct  4 13:26 .
+```
+
+]
+
+---
+
+class: workarounds
+
+### But: quid of multualized environment, with *one* root
+
+That means: `appgit` is `root` (for *all* applications)
+
+.absolute.w-10-12th.h-7-12th.l-1-12th.t-4-12th.dockerfile[
+
+```bash
+dev-server:/appsonar # l /docker/1158.540/volumes/.../_data/
+total 4.0K
+-rw-r--r-- 1   2157   1539 115 Sep 25  2017 README.txt
+*drwxr-xr-x 1 appgit appgit  10 Oct  4 13:26 ..
+drwxr-xr-x 1   2157   1539  20 Oct  4 13:26 .
+```
+
+]
+</textarea>
     <script type="text/javascript" src="https://vonc.github.io/talks/js/qrcode.js"></script>
     <script src="https://vonc.github.io/talks/js/remark.js"></script>
     <script>

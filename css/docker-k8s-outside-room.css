@@ -10,9 +10,12 @@
 
 .remark-slide-content.problems > h2 {
     position: relative;
-    color: red;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding-left: 0.3em;
+    color: #c46c00;
+    background-color: #ffbb68;
+    border: #c46c00;
+    border-style: inset;
+    border-width: 5px;
+    padding: 10px;
 }
 
 
@@ -20,8 +23,63 @@
     width: 60%;
 }
 
+/* https://stackoverflow.com/a/47757646/6309
+   https://caniuse.com/#search=flex */
+.remark-slide-content.problems li {
+    color: #ffa73b;
+    background-color: #975300;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.remark-slide-content.problems li img {
+    padding-right: 0.5em;
+}
+
+
+.remark-slide-content.item1 li:nth-child(1) {
+    border-color: #ffa73b;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.remark-slide-content.item2 li:nth-child(2) {
+    border-color: #ffa73b;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.remark-slide-content.item3 li:nth-child(3) {
+    border-color: #ffa73b;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.remark-slide-content.item4 li:nth-child(4) {
+    border-color: #ffa73b;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.remark-slide-content.problems > h3 {
+    position: relative;
+    background: rgba(151, 34, 0, 0.7);
+    color: #ff8a68;
+    border-width: 10;
+    border-style: inset;
+    border-color: #ff673b;
+    padding-left: 10px;
+}
+
+.remark-slide-content p > code {
+    color: black;
+}
 .workarounds > h3 {
     background-color: mediumturquoise;
+    position: relative;
+    padding: 10px;
     color: black;
 }
 .workarounds > h3 > img {
