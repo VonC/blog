@@ -42,12 +42,21 @@
     line-height: 80px;
 }
 
+.remark-slide-content.conclusion > ul {
+    width: 60%;
+}
+
 .remark-slide-content.tt > ul > li {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+}
+
+.remark-slide-content.questions > ul > li {
+    padding-top: 25%;
+    font-size: 4rem;
 }
 
 .remark-slide-content.tt > ul > li img {
