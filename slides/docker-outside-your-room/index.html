@@ -96,17 +96,16 @@ class: img-left-right-full tt
 
 ---
 
+class: presentation
+
 ### About this presentation
 
-- Available at [github.com](https://github.com/VonC/talks/blob/201710_docker/PITCHME.md)
+- Available at [github.com](https://vonc.github.io/talks/slides/docker-outside-your-room), with [article](https://vonc.github.io/talks/talks/docker-outside-your-room/)
 - Available at intranet.softeam.com:  
   &#34;[Docker outside your room? Not so Easy!](https://intranet.softeam.fr/node/2943)&#34;
 - Fully annotated
 
-Note:
-
-You will find in the shownotes (or directly in the markdown article on GitHub)
-additional information with each slides.
+???
 
 Palette: &lt;http://paletton.com/#uid=1000u0k004h0jin01bM5n02dm0p&gt;
 
@@ -118,13 +117,13 @@ class: img-left, about1
 
 ![Chaffiol](/talks/img/chaffiol.jpg# w-5)
 
-![Softeam Group](/talks/img/softeam-group.jpg# w-3 fr)
+![Softeam Group](/talks/img/softeam-group.jpg# w-4 fr)
 
 **Daniel CHAFFIOL** (Softeam)
 
 - Since 1999
 - Development architect
-- CV: &lt;https://stackoverflow.com/cv/vonc&gt;
+- CV: [stackoverflow.com/cv/vonc](https://stackoverflow.com/cv/vonc)
 - clients:
     - ![BNP-Paribas logo](/talks/img/bnp-paribas.png# w-2) BNP(-Paribas)
     - ![SGCIB logo](/talks/img/sgcib.png# w-2) SGCIB
@@ -138,7 +137,7 @@ class: img-right, about2
 
 ### About me (VonC)
 
-![VonC](/talks/img/vonc.jpg# w-5)
+![VonC](/talks/img/vonc.jpg# w-7)
 
 ![Stack Overflow logo](/talks/img/stackoverflow2.png# w-5 fr bg-gray)
 
@@ -161,7 +160,7 @@ Slides are at &lt;https://vonc.github.io/talks/&gt; or you can scan the QR code.
 
 - DarkOrange: &lt;https://www.color-hex.com/color/ff8c00&gt;
 - Palette: &lt;http://paletton.com/palette.php?uid=50F0u0kw0w0iZDSo-yfyho-DUi%2B&gt;
-- Icons: &lt;https://www.flaticon.com/packs/web-hosting-24?style_id=50&amp;family_id=17&amp;group_id=172&amp;category_id=28,31,42,78 /&gt;
+- Icons: &lt;https://www.flaticon.com/packs/web-hosting-24?style_id=50&amp;family_id=17&amp;group_id=172&amp;category_id=28,31,42,78/&gt;
 
 ---
 
@@ -174,21 +173,9 @@ class: img-left-right-full tt tools
 --
 
 - ![GitLab logo](/talks/img/gitlab.png# w-3) GitLab
-
---
-
 - ![Artifactory logo](/talks/img/artifactory.png# w-3) Artifactory
-
---
-
 - ![Xray logo](/talks/img/xray.png# w-3) Xray
-
---
-
 - ![Sonarqube logo](/talks/img/sonarqube.png# w-3) Sonarqube
-
---
-
 - ![Jenkins logo](/talks/img/jenkins.png# w-3) Jenkins
 
 ---
@@ -534,6 +521,28 @@ drwxr-xr-x  7 appxray appxray   87 Nov 13 10:07 .
 
 class: workarounds
 
+### Issue 1: check `docker history` for layers
+
+Source: &lt;https://bintray.com/jfrog/reg2/jfrog:xray-installer/&gt;
+
+.absolute.w-2-12th.h-4-12th.l-1-12th.t-4-12th.dockerfile[
+
+![XRay layers](xray-layers.png)
+
+]
+
+--
+
+.absolute.w-3-12th.h-4-12th.l-6-12th.t-4-12th.dockerfile[
+
+![Xray adduser](xray-adduser.png)
+
+]
+
+---
+
+class: workarounds
+
 ### Issue 1: unknown account from the image
 
 Origin: this is the account used in Dockerfile image.
@@ -565,7 +574,7 @@ Origin: It is hard-coded in the Docker image provided by the editor!?
 
 ```Docker
 *  gid=1035 group=xray uid=1035 user=xray \
-   /bin/sh -c groupadd -g ${gid} ${group} &amp;&amp;\
+*  /bin/sh -c groupadd -g ${gid} ${group} &amp;&amp;\
               useradd -d /home/${USER} -u ${uid} -g ${gid} \
                       -m -s /bin/bash ${user}
 ```
@@ -647,6 +656,10 @@ RUN find /opt/xray -group 1035 -exec chgrp -h xray {} \;
 ```
 
 ]
+
+???
+
+Artifactory is better: &lt;https://bintray.com/jfrog/reg2/jfrog%3Aartifactory-pro/&gt;
 
 ---
 
@@ -897,15 +910,9 @@ class: img-left-right-full tt conclusion
 - ![Firewall](firewall.png) Data =&gt; backups(!)
 - ![LDAP/AD](cloud.png) Users =&gt; usermod, remap, root
 
----
+--
 
-class: img-left-right-full tt conclusion questions
-
-![your enterprise](venveo-609390-unsplash.jpg)
-
-![your room](victoria-heath-597279-unsplash.jpg# middle)
-
-- ![Proxy](questions.png) Any question?
+- ![Proxy](questions.png) Any questions ?
 
 ???
 

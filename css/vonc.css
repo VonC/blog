@@ -44,6 +44,7 @@
 
 .remark-slide-content.conclusion > ul {
     width: 60%;
+    height: 94%;
 }
 
 .remark-slide-content.tt > ul > li {
@@ -54,8 +55,7 @@
     margin-inline-end: 0px;
 }
 
-.remark-slide-content.questions > ul > li {
-    padding-top: 25%;
+.remark-slide-content.conclusion > ul > li:nth-of-type(5) {
     font-size: 4rem;
 }
 
