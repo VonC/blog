@@ -6,7 +6,7 @@
     <description>Recent content in Slides on VonC&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Oct 2018 23:54:27 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 17 Dec 2018 03:54:27 +0200</lastBuildDate>
     
 	<atom:link href="https://vonc.github.io/talks/slides/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Docker/Kubernetes outside your room</title>
       <link>https://vonc.github.io/talks/slides/docker-outside-your-room/</link>
-      <pubDate>Wed, 10 Oct 2018 23:54:27 +0200</pubDate>
+      <pubDate>Mon, 17 Dec 2018 03:54:27 +0200</pubDate>
       
       <guid>https://vonc.github.io/talks/slides/docker-outside-your-room/</guid>
       <description>class: title, smokescreen, shelf, no-footer background-image: url(victoria-heath-597279-unsplash.jpg)

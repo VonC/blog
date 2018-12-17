@@ -7,12 +7,12 @@
 		<language>en-us</language>
 		<author>VonC</author>
 		<rights>Copyright (c) 2018</rights>
-		<updated>2018-10-10 23:54:27 &#43;0200 CEST</updated>
+		<updated>2018-12-17 03:54:27 &#43;0200 &#43;0200</updated>
 		
 		<item>
 			<title>Docker/Kubernetes outside your room</title>
 			<link>https://vonc.github.io/talks/talks/docker-outside-your-room/</link>
-			<pubDate>Wed, 10 Oct 2018 23:47:18 CEST</pubDate>
+			<pubDate>Mon, 17 Dec 2018 03:47:18 &#43;0200</pubDate>
 			<author>VonC</author>
 			<guid>https://vonc.github.io/talks/talks/docker-outside-your-room/</guid>
 			<description>
@@ -22,7 +22,7 @@
 &lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
 
 &lt;p&gt;You want to quickly test a docker image from an editor, say &lt;a href=&#34;https://jfrog.com/artifactory/&#34;&gt;Artifactory&lt;/a&gt;.&lt;br /&gt;
-Since you don&amp;rsquo;t want to install all the pre-requisites for an Artifactory server to run, you &amp;ldquo;docker pull&amp;rdquo; the image, and &amp;ldquo;docker run&amp;rdquo; its container.&lt;/p&gt;
+Since you don&amp;rsquo;t want to install all the pre-requisites for an Artifactory server to run, you &amp;ldquo;&lt;code&gt;docker pull&lt;/code&gt;&amp;rdquo; the image, and &amp;ldquo;&lt;code&gt;docker run&lt;/code&gt;&amp;rdquo; its container (easy).&lt;/p&gt;
 
 &lt;p&gt;And it works!&lt;/p&gt;
 
